@@ -1,0 +1,207 @@
+header {
+    padding: 15px 30px;
+    padding-top: 140px;
+    text-align: center;
+    color: #fff;
+}
+
+.tips{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 3%;
+}
+
+.tip {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 calc(33.33% - 20px);
+    width: calc(33.33% - 20px);
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+                0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.tip:hover{
+    transform: scale(1.05);
+}
+
+.tip img{
+    width: 120px;
+    height: 120px;
+    padding-left: 30%;
+    padding-top: 1%;
+}
+
+.tip, .text-tecn{
+    text-align: center;
+    padding: 5px;
+}
+
+.tip1{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.tip3{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.test-main{
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+button{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.desacuerdo{
+    margin-right: 60px;
+    
+}
+
+.deacuerdo{
+    margin-left: 60px;
+}
+
+.small{
+    width: 25px;
+    height: 25px;
+    background-color: none;
+    border-radius: 50%;
+    border: solid 3px #916f13;
+}
+
+.medium{
+    width: 40px;
+    height: 40px;
+    background-color: none;
+    border-radius: 50%;
+    border: solid 3px #916f13;
+}
+
+.large{
+    width: 60px;
+    height: 60px;
+    background-color: none;
+    border-radius: 50%;
+    border: solid 3px #916f13;
+}
+
+.options{
+    margin-left: 21%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.question{
+    text-align: center;
+    padding: 50px;
+    
+}
+
+.circle{
+    transition: all 0.3s;
+}
+
+.circle:hover{
+    background: #916f13;
+    color: white;
+}
+
+.linea {
+    border-top: solid 1px gray;
+}
+
+
+
+#fin-tecn{
+    display: block;
+    margin: 40px auto;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 20px;
+    color: #fff;
+    background-color: #916f13;
+    border-radius: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+#fin-tecn{
+    transition: all 0.3s;
+}
+
+#fin-tecn:hover{
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px){
+    .tips {
+        flex-direction: column;
+        margin-left: 5%;
+        margin-right: 5%;
+        align-items: center;
+    }
+    
+    .tip {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    
+    .tip img {
+        padding-left: 0;
+        margin: 0 auto;
+    }
+    .options {
+        margin-left: 0;
+        justify-content: center;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .small{
+        width: 10px;
+        height: 10px;
+        background-color: none;
+        border-radius: 50%;
+        border: solid 3px #916f13;
+    }
+    
+    .medium{
+        width: 15px;
+        height: 15px;
+        background-color: none;
+        border-radius: 50%;
+        border: solid 3px #916f13;
+    }
+    
+    .large{
+        width: 30px;
+        height: 30px;
+        background-color: none;
+        border-radius: 50%;
+        border: solid 3px #916f13;
+    }
+
+    .deacuerdo, .desacuerdo {
+        margin: 0;
+        font-size: 8px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+}

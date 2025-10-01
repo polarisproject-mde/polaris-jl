@@ -1,0 +1,490 @@
+.contain-main {
+    padding-top: 100px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sección Hero */
+.hero-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    border-radius: 20px;
+    margin-bottom: 80px;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    padding: 40px;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    color: #d9d9d9;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #d9d9d9;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.hero-icon svg {
+    width: 100px;
+    height: 100px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(0deg); }
+}
+
+/* Secciones de pasos */
+.step-section {
+    margin: 100px 0;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.step-section.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.content.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Texto de las secciones */
+.text {
+    flex: 1;
+    padding: 40px;
+    border-radius: 20px;
+    background: #d9d9d9;
+    border: 1px solid #d9d9d9;
+    backdrop-filter: blur(1px);
+    position: relative;
+    overflow: hidden;
+}
+
+.text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 0 2px 2px 0;
+}
+
+.step-number {
+    display: inline-block;
+    background: #010c1e;
+    color: #d9d9d9;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+.text h2 {
+    font-size: 2.2rem;
+    color: #010c1e;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.text p {
+    font-size: 1.1rem;
+    color: #010c1e;
+    opacity: 0.9;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.highlight-box {
+    background: #010813;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border-left: 4px solid #010c1e;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #d9d9d993;
+    transition: all 0.3s ease;
+}
+
+.highlight-box strong {
+    color: #d9d9d9;
+}
+
+/* Imágenes SVG */
+.img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.img svg {
+    width: 250px;
+    height: 250px;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.img svg:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+/* Sección CTA actualizada */
+.cta-section {
+    text-align: center;
+    padding: 80px 40px;
+    border-radius: 20px;
+    margin: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    color: #d9d9d9;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    color: #d9d9d9;
+    opacity: 0.9;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Cards de tips finales */
+.final-tips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tip-card {
+    background: #d9d9d9;
+    border-radius: 15px;
+    padding: 30px 20px;
+    border: 1px solid #010c1e;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.tip-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(33, 40, 48, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.tip-card svg {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.tip-card:hover svg {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.tip-card h3 {
+    font-size: 1.3rem;
+    color: #010c1e;
+    margin-bottom: 10px;
+}
+
+.tip-card p {
+    font-size: 1rem;
+    color: #010c1e;
+    opacity: 0.9;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 968px) {
+    .hero-section h1 {
+        font-size: 2.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .content {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .content.reverse {
+        flex-direction: column;
+    }
+    
+    .text {
+        padding: 30px;
+    }
+    
+    .text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .img svg {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-section {
+        min-height: 60vh;
+        margin-bottom: 60px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-icon svg {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .step-section {
+        margin: 60px 0;
+    }
+    
+    .text {
+        padding: 25px;
+    }
+    
+    .text h2 {
+        font-size: 1.6rem;
+    }
+    
+    .text p {
+        font-size: 1rem;
+    }
+    
+    .img svg {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .cta-section {
+        padding: 60px 20px;
+        margin: 60px 0;
+    }
+    
+    .cta-section h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-section p {
+        font-size: 1rem;
+    }
+    
+    .final-tips {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .tip-card {
+        padding: 25px 15px;
+    }
+    
+    .tip-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .tip-card p {
+        font-size: 0.9rem;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .contain-main {
+        width: 95%;
+        padding-top: 70px;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .text {
+        padding: 20px;
+    }
+    
+    .text h2 {
+        font-size: 1.4rem;
+    }
+    
+    .step-number {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+    
+    .highlight-box {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .img svg {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .final-tips {
+        gap: 15px;
+    }
+    
+    .tip-card {
+        padding: 20px 12px;
+    }
+    
+    .tip-card svg {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 15px;
+    }
+    
+    .tip-card h3 {
+        font-size: 1rem;
+    }
+    
+    .tip-card p {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* Animaciones adicionales */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.step-section:nth-child(even) .text {
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.step-section:nth-child(odd) .text {
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.step-section.animate-in .text {
+    animation-delay: 0.2s;
+}
+
+.step-section.animate-in .img {
+    animation: slideInRight 0.8s ease 0.4s forwards;
+}
+
+.step-section.reverse.animate-in .img {
+    animation: slideInLeft 0.8s ease 0.4s forwards;
+}
+
+/* Efectos de hover mejorados */
+.text:hover {
+    transform: translateY(-5px);
+}
+
+.highlight-box:hover {
+    background: #010813;
+    transform: translateX(10px);
+}
+
+/* Scroll smooth */
+html {
+    scroll-behavior: smooth;
+}

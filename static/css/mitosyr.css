@@ -1,0 +1,305 @@
+main {
+    margin-top: 0;
+    padding: 0;
+    color: white;
+}
+
+.header-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.header-section h1 {
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: #fff;
+    margin-bottom: 1rem;
+    letter-spacing: -2px;
+    position: relative;
+    z-index: 2;
+}
+
+.header-section h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #d9d9d9;
+    border-radius: 2px;
+}
+
+.header-section p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    color: rgba(217, 217, 217, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+}
+
+.myths-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    position: relative;
+}
+
+.myths-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #010c1e, transparent);
+    z-index: 0;
+}
+
+.myth-item {
+    background: #d9d9d9;
+    border: 2px solid #010c1e;
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    box-shadow: 
+        0 10px 30px rgba(1, 12, 30, 0.1),
+        0 1px 3px rgba(1, 12, 30, 0.1);
+    z-index: 1;
+}
+
+.myth-item::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #010c1e, #010813, #010c1e);
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.myth-item:hover::before {
+    opacity: 1;
+}
+
+.myth-item:nth-child(odd) {
+    margin-left: 2rem;
+}
+
+.myth-item:nth-child(even) {
+    margin-right: 2rem;
+}
+
+.myth-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.myth-item:hover {
+    background: #e8e8e8;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(1, 12, 30, 0.15),
+        0 5px 15px rgba(1, 12, 30, 0.1);
+}
+
+.myth-badge {
+    display: inline-block;
+    background: #010c1e;
+    color: #d9d9d9;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    box-shadow: 
+        0 4px 15px rgba(1, 12, 30, 0.3),
+        inset 0 1px 0 rgba(217, 217, 217, 0.1);
+    position: relative;
+}
+
+.myth-badge::before {
+    content: '✗';
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.myth-item h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #010c1e;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.myth-item h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #010813;
+    border-radius: 2px;
+}
+
+.reality-text {
+    border: none;
+    background: #010813;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 1.5rem 0 0 0;
+    position: relative;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.reality-text::before {
+    content: '✓';
+    position: absolute;
+    top: -12px;
+    left: 2rem;
+    background: #010813;
+    color: #d9d9d9;
+    padding: 0.5rem;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.9rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reality-text p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    color: #d9d9d9;
+    line-height: 1.8;
+    margin: 0;
+    position: relative;
+    padding-top: 0.5rem;
+}
+
+.reality-text strong {
+    color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-section {
+        height: 100vh;
+        padding: 1rem;
+    }
+    
+    .header-section h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        letter-spacing: -1px;
+    }
+    
+    .header-section p {
+        font-size: 1.1rem;
+    }
+    
+    .myths-container {
+        padding: 4rem 1rem;
+        gap: 2.5rem;
+    }
+    
+    .myths-container::before {
+        display: none;
+    }
+    
+    .myth-item {
+        padding: 2rem;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .myth-item h2 {
+        font-size: 1.3rem;
+    }
+    
+    .reality-text {
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .reality-text p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-section {
+        height: 100vh;
+        padding: 1rem;
+    }
+    
+    .myths-container {
+        padding: 3rem 1rem;
+        gap: 2rem;
+    }
+    
+    .myth-item {
+        padding: 1.5rem;
+    }
+    
+    .myth-item h2 {
+        font-size: 1.2rem;
+        padding-left: 0.8rem;
+    }
+    
+    .myth-badge {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.7rem;
+    }
+    
+    .reality-text {
+        padding: 1.2rem;
+    }
+    
+    .reality-text::before {
+        left: 1.2rem;
+    }
+}

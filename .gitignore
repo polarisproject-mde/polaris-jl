@@ -1,0 +1,52 @@
+# Entorno virtual
+.venv/
+venv/
+ENV/
+env/
+
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pip / packaging
+pip-wheel-metadata/
+*.egg-info/
+*.dist-info/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+
+# IDEs / editores
+.vscode/
+.idea/
+
+# Configs locales y secretos
+.env
+.env.*
+secrets.json
+
+# Bases de datos locales
+*.sqlite3
+*.db
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# MyPy / caches
+.mypy_cache/
+
+# Build / dist
+build/
+dist/
+*.egg
+
+# Vercel / deployment
+.vercel/
+.vercelignore

@@ -1,0 +1,824 @@
+:root {
+    --azul-dark: #010C1E;
+    --blanco-gris: #D9D9D9;
+    --azul-negro: #010813;
+    --hover-color: #1d4ed8;
+    --success-color: #16a34a;
+    --warning-color: #f59e0b;
+    --danger-color: #dc2626;
+    --gradient: linear-gradient(135deg, #010C1E 0%, #1e3a8a 100%);
+    --glass-bg: rgba(217, 217, 217, 0.1);
+    --glass-border: rgba(217, 217, 217, 0.2);
+}
+
+main {
+    color: var(--azul-dark);
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: none;
+    border-radius: 20px;
+}
+
+.page-header h1 {
+    font-size: 2.5em;
+    margin: 0;
+    color: var(--blanco-gris);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.page-header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+    font-weight: 300;
+    color: var(--blanco-gris);
+}
+
+/* Contenedor principal mejorado */
+#fechas-importantes {
+    display: flex;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Sidebar */
+#event-sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    background: var(--blanco-gris);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--azul-dark);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#event-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--azul-dark);
+    border-radius: 20px 20px 0 0;
+}
+
+#event-sidebar:hover {
+    transform: translateY(-5px);
+}
+
+#event-sidebar h3 {
+    font-size: 1.4em;
+    margin: 0 0 20px 0;
+    color: var(--azul-dark);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#event-sidebar h3::before {
+    content: '📅';
+    font-size: 1.2em;
+}
+
+/* Botón mejorado para añadir evento */
+#add-event-btn {
+    background: var(--azul-dark);
+    color: var(--blanco-gris);
+    border: none;
+    font-size: 1.6em;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-event-btn:hover {
+    transform: scale(1.1) rotate(90deg);
+    background-color: var(--azul-negro);
+}
+
+/* Lista de eventos mejorada */
+#event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--azul-negro) transparent;
+}
+
+#event-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#event-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#event-list::-webkit-scrollbar-thumb {
+    background: var(--azul-negro);
+    border-radius: 3px;
+}
+
+#event-list li {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: var(--azul-dark);
+    border-radius: 12px;
+    border-left: 4px solid var(--azul-negro);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#event-list li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--azul-dark);
+    transition: left 0.5s ease;
+}
+
+#event-list li:hover::before {
+    left: 100%;
+}
+
+#event-list li:hover {
+    transform: translateX(5px);
+    background: #010C1e10;
+    border-left-color: var(--azul-negro);
+}
+
+#event-list li strong {
+    color: var(--blanco-gris);
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#event-list li .time {
+    color: var(--blanco-gris);
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+#event-list li:hover strong,
+#event-list li:hover .time {
+    color: var(--azul-dark);
+}
+
+
+/* Sección del calendario */
+#calendar-section {
+    flex-grow: 1;
+    background: var(--blanco-gris);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--azul-dark);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Header del calendario */
+#calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+#prev-month, #next-month {
+    background: var(--azul-dark);
+    color: var(--blanco-gris);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prev-month:hover, #next-month:hover {
+    background: var(--azul-negro);
+    transform: scale(1.1);
+}
+
+#month-year {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.8em;
+    color: var(--azul-dark);
+    text-transform: capitalize;
+    text-align: center;
+    min-width: 250px;
+}
+
+/* Grid del calendario */
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.weekdays li {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--blanco-gris);
+    padding: 15px 5px;
+    background: var(--azul-dark);
+    border-radius: 10px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#calendar-days li {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 600;
+    background: none;
+    border: 2px solid var(--azul-dark);
+}
+
+#calendar-days li:hover {
+    background: var(--azul-dark);
+    color: var(--blanco-gris);
+    transform: scale(1.05);
+}
+
+#calendar-days li.active {
+    background: var(--azul-negro);
+    color: var(--blanco-gris);
+    transform: scale(1.05);
+}
+
+#calendar-days li.event-day {
+    background: linear-gradient(135deg, var(--warning-color), #d97706);
+    color: white;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+#calendar-days li.event-day::after {
+    content: '●';
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    color: white;
+    font-size: 0.8em;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+#calendar-days li.inactive {
+    color: #01081350;
+    background: transparent;
+}
+
+#calendar-days li.inactive:hover {
+    background: #01081349;
+    color: rgba(217, 217, 217, 0.6);
+}
+
+/* Modales mejorados */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(1, 12, 30, 0.8);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: var(--azul-dark);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--azul-negro);
+    border-radius: 20px;
+    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    color: var(--blanco-gris);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    animation: modalAppear 0.3s ease forwards;
+}
+
+@keyframes modalAppear {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.5em;
+    margin: 0 0 25px 0;
+    color: var(--blanco-gris);
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    border: 2px solid var(--glass-border);
+    border-radius: 10px;
+    background: rgba(217, 217, 217, 0.05);
+    color: var(--secondary-color);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: rgba(217, 217, 217, 0.1);
+}
+
+.modal-content input::placeholder {
+    color: rgba(217, 217, 217, 0.5);
+}
+
+.modal-content button {
+    background:var(--blanco-gris);
+    color: var(--azul-dark);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.modal-content button:hover {
+    background: #01081341;
+    color: var(--blanco-gris);
+    transform: translateY(-2px);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--blanco-gris);
+    transition: all 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    color: white;
+    transform: rotate(30deg);
+}
+
+/* Estilos para el modal de detalles */
+#details-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#details-content li {
+    padding: 15px;
+    margin: 10px 0;
+    background: rgba(217, 217, 217, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Botón toggle sidebar mejorado */
+#toggle-sidebar-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--azul-dark);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 110;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+#toggle-sidebar-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2em;
+    }
+
+    #fechas-importantes {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #event-sidebar {
+        position: fixed;
+        right: -350px;
+        top: 100px;
+        height: calc(100vh - 100px);
+        width: 300px;
+        transition: right 0.3s ease;
+        z-index: 200;
+    }
+
+    #event-sidebar.show {
+        right: 0;
+    }
+
+    #toggle-sidebar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #calendar-section {
+        padding: 20px;
+    }
+
+    #month-year {
+        font-size: 1.4em;
+        min-width: auto;
+    }
+
+    .weekdays li {
+        padding: 10px 2px;
+        font-size: 0.8em;
+    }
+
+    .modal-content {
+        width: 350px;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .page-header h1 {
+        font-size: 1.8em;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    #calendar-section {
+        padding: 15px;
+    }
+
+    .modal-content {
+        width: 300px;
+        padding: 20px;
+    }
+
+    #event-sidebar {
+        width: 280px;
+        right: -300px;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#event-sidebar {
+    animation: slideInLeft 0.6s ease;
+}
+
+#calendar-section {
+    animation: slideInRight 0.6s ease;
+}
+
+/* Efectos adicionales para mejorar la experiencia */
+.notification {
+    position: fixed;
+    top: 120px;
+    right: 20px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(22, 163, 74, 0.4);
+    z-index: 1100;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+/* Estilos para scrollbar personalizado en toda la página */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-color);
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus indicators para navegación por teclado */
+button:focus,
+input:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+#calendar-days li:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Estados de carga */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--glass-border);
+    border-radius: 50%;
+    border-top-color: var(--accent-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Mejoras para modo oscuro nativo del sistema */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --glass-bg: rgba(217, 217, 217, 0.15);
+        --glass-border: rgba(217, 217, 217, 0.25);
+    }
+}
+
+/* Efectos hover adicionales para elementos interactivos */
+#add-event-btn,
+#prev-month,
+#next-month,
+.modal-content button {
+    position: relative;
+    overflow: hidden;
+}
+
+#add-event-btn::before,
+#prev-month::before,
+#next-month::before,
+.modal-content button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+#add-event-btn:hover::before,
+#prev-month:hover::before,
+#next-month:hover::before,
+.modal-content button:hover::before {
+    width: 100px;
+    height: 100px;
+}
+
+/* Indicadores de estado para eventos */
+.event-priority-high {
+    border-left-color: var(--danger-color) !important;
+}
+
+.event-priority-medium {
+    border-left-color: var(--warning-color) !important;
+}
+
+.event-priority-low {
+    border-left-color: var(--success-color) !important;
+}
+
+/* Tooltips personalizados */
+[title] {
+    position: relative;
+}
+
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    z-index: 1001;
+    pointer-events: none;
+    margin-bottom: 5px;
+}
+
+[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--primary-color);
+    z-index: 1001;
+    pointer-events: none;
+}
+
+.event-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.event-details {
+    flex: 1;
+}
+
+.delete-event-btn {
+    background: var(--danger-color, #dc2626);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.delete-event-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+.delete-event-btn.small {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7em;
+}
+
+.event-detail-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}

@@ -1,0 +1,518 @@
+/* === HERO SECTION === */
+.hero {
+    position: relative;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    margin-bottom: 1.5rem;
+    color: #d9d9d9;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #d9d9d9;
+    opacity: 0.9;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+.hero-btn {
+    background: #d9d9d9;
+    border: none;
+    padding: 18px 40px;
+    color: #010813;
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+    will-change: transform;
+}
+
+.hero-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(45deg, #ffffff, #d9d9d9);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    background: none;
+    border-radius: 50%;
+    padding: 12px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.scroll-indicator svg {
+    width: 40px;
+    height: 40px;
+    fill: rgba(217, 217, 217, 0.7);
+    transition: all 0.3s ease;
+}
+
+.scroll-indicator:hover svg {
+    fill: #d9d9d9;
+    transform: scale(1.1);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1); }
+    40% { transform: translateY(-8px) scale(1); }
+    60% { transform: translateY(-4px) scale(1); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+/* === DASHBOARD SECTION === */
+.dashboard {
+    min-height: 100vh;
+    padding: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-header h2 {
+    color: #d9d9d9;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 900;
+}
+
+.section-header p {
+    color: rgba(217, 217, 217, 0.8);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.6;
+    font-family: "Montserrat", sans-serif;
+}
+
+.dashboard-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+/* === CARDS === */
+.card {
+    background: #d9d9d9;
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(1, 12, 30, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(1, 12, 30, 0.2);
+    box-shadow: 0 20px 40px rgba(1, 12, 30, 0.15);
+}
+
+.card h3 {
+    color: #010c1e;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 1.5rem;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 700;
+}
+
+/* Stats Card */
+.stats-card {
+    grid-column: span 6;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    flex-grow: 1;
+    align-content: center;
+}
+
+.stat-item {
+    background: #010c1e;
+    padding: 1.8rem 1.2rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(1, 12, 30, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 120px;
+}
+
+.stat-item:hover {
+    background: #010813;
+    transform: scale(1.05);
+    border-color: rgba(1, 12, 30, 0.3);
+}
+
+.stat-number {
+    display: block;
+    font-size: clamp(2.2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: #d9d9d9;
+    font-family: "Archivo Black", sans-serif;
+    line-height: 1;
+}
+
+.stat-label {
+    color: rgba(217, 217, 217, 0.9);
+    font-size: 1.1rem;
+    margin-top: 0.8rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+}
+
+/* Intro Card */
+.intro-card {
+    grid-column: span 6;
+}
+
+.intro-card p {
+    color: #010813;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    color: #d9d9d9;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.8rem;
+    background: #010c1e;
+    border-radius: 12px;
+    border-left: 4px solid #d9d9d9;
+    transition: all 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+}
+
+.feature-list li:hover {
+    background: #010813;
+    transform: translateX(8px);
+    color: #d9d9d9;
+}
+
+/* Login Card */
+.login-card {
+    grid-column: span 4;
+    text-align: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.login-form input {
+    padding: 1rem 1.5rem;
+    background: rgba(1, 8, 19, 0.05);
+    border: 2px solid rgba(1, 12, 30, 0.2);
+    border-radius: 12px;
+    color: #010c1e;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+}
+
+.login-form input::placeholder {
+    color: rgba(1, 12, 30, 0.6);
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #010c1e;
+    background: rgba(1, 8, 19, 0.1);
+    box-shadow: 0 0 15px rgba(1, 12, 30, 0.1);
+}
+
+.login-btn {
+    background: #010c1e;
+    border: none;
+    padding: 1rem 2rem;
+    color: #d9d9d9;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    background: #010813;
+    box-shadow: 0 8px 20px rgba(1, 12, 30, 0.3);
+}
+
+.register-link {
+    color: #010813;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    transition: color 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+}
+
+.register-link:hover {
+    color: #010c1e;
+    text-decoration: underline;
+}
+
+/* Steps Card */
+.steps-card {
+    grid-column: span 8;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    background: #010c1e;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(1, 12, 30, 0.1);
+}
+
+.step-item:hover {
+    background: #010813;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(1, 12, 30, 0.2);
+}
+
+.step-item:hover .step-content h4,
+.step-item:hover .step-content p {
+    color: #d9d9d9;
+}
+
+.step-number {
+    background: #010813;
+    color: #d9d9d9;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: "Archivo Black", sans-serif;
+    box-shadow: 0 4px 15px rgba(1, 12, 30, 0.1);
+    transition: all 0.3s ease;
+}
+
+.step-item:hover .step-number {
+    background: #d9d9d9;
+    color: #010c1e;
+}
+
+.step-content h4 {
+    color: #d9d9d9;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-family: "Archivo Black", sans-serif;
+    transition: color 0.3s ease;
+}
+
+.step-content p {
+    color: #d9d9d9;
+    opacity: 0.9;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-family: "Montserrat", sans-serif;
+    transition: color 0.3s ease;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .stats-card { grid-column: span 4; }
+    .intro-card { grid-column: span 4; }
+    .login-card { grid-column: span 4; }
+    .steps-card { grid-column: span 8; }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: calc(100vh - 100px);
+        padding: 0 1rem;
+    }
+    
+    .hero-subtitle {
+        margin-bottom: 2rem;
+    }
+    
+    .hero-btn {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+    
+    .scroll-indicator {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px;
+    }
+    
+    .scroll-indicator svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .card {
+        grid-column: 1 !important;
+        padding: 1.5rem;
+    }
+
+    .stats-grid,
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .section-header {
+        margin-bottom: 3rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    .hero {
+        min-height: calc(100vh - 140px);
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .hero {
+        min-height: calc(100vh - 130px);
+    }
+}
+
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.auth-btn.login-link {
+    background: #010c1e;
+    color: #d9d9d9;
+    border: 2px solid #010c1e;
+}
+
+.auth-btn.login-link:hover {
+    transform: translateY(-2px);
+    background: #010813;
+    box-shadow: 0 8px 20px rgba(1, 12, 30, 0.3);
+}
+
+.auth-btn.register-link {
+    background: transparent;
+    color: #010c1e;
+    border: 2px solid #010c1e;
+}
+
+.auth-btn.register-link:hover {
+    background: #010c1e;
+    color: #d9d9d9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(1, 12, 30, 0.2);
+}
+
+.auth-btn svg {
+    transition: all 0.3s ease;
+}
+
+.auth-btn:hover svg {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .auth-btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}

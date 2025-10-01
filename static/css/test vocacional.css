@@ -1,0 +1,120 @@
+.vocational-test {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20%;
+    padding: 80px 40px 40px 40px;
+    margin-top: 80px;
+}
+
+.img-cerebro img {
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-top: -10%;
+}
+
+.text-voc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    text-align: center;
+    margin-top: -6%;
+}
+
+.text-voc h1 {
+    font-size: 2.3rem;
+    margin: 0;
+    color: white;
+}
+
+.btn-test button {
+    padding: 12px 24px;
+    background: #d9d9d9;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    font-size: 20px;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    width: 100%;
+}
+
+.btn-test button:hover {
+    transform: scale(1.05);
+    background-color: #efefef;
+}
+
+.container-tests {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;           
+    padding: 40px 0;
+    flex-wrap: wrap;              
+    text-align: center;
+}
+
+.test-tecn, .test-cienc, .test-ingen, .test-econo {
+    background: #d9d9d9;
+    padding: 20px;
+    border-radius: 12px;
+    height: 180px;
+    width: 180px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.test-tecn:hover,
+.test-cienc:hover,
+.test-ingen:hover,
+.test-econo:hover {
+    transform: scale(1.05);
+}
+
+.icon-tec svg {
+    width: 100px;
+    height: 100px;
+    color: #010c1e;
+}
+
+.icon-cie svg {
+    width: 100px;
+    height: 100px;
+    color: #010c1e;
+}
+
+
+.icon-ing svg {
+    width: 100px;
+    height: 100px;
+    color: #010c1e;
+}
+
+
+.icon-eco svg {
+    width: 100px;
+    height: 100px;
+    color: #010c1e; 
+}
+
+
+.text-indi{
+    color: white;
+    text-align: center;
+}
+
+.sin-linea{
+    text-decoration: none;
+    color: #000000;
+}
+
+@media (max-width: 768px){
+    .container-tests{
+        gap: 10px;
+    }
+}
