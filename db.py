@@ -15,13 +15,15 @@ if not URL_DATABASE:
 # 🔹 Crear motor de conexión
 engine = create_engine(URL_DATABASE, echo=False, future=True)
 
-# 🔹 Probar conexión (solo para desarrollo)
-try:
-    with engine.connect() as conn:
-        conn.execute(text("SELECT 1"))
-        print("✅ Conexión a la base de datos exitosa")
-except Exception as e:
-    print(f"❌ Error de conexión a la base de datos: {e}")
+# NOTA: no ejecutar prueba de conexión en import para evitar fallos en entorno serverless.
+# Si quieres hacer pruebas locales, actívalo solo en desarrollo.
+# try:
+#     with engine.connect() as conn:
+#         conn.execute(text("SELECT 1"))
+#         print("✅ Conexión a la base de datos exitosa")
+# except Exception as e:
+#     print(f"❌ Error de conexión a la base de datos: {e}")
+
 
 # 🔹 Configuración de la sesión
 SessionLocal = sessionmaker(
