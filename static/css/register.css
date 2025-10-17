@@ -1,0 +1,325 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: "Montserrat", sans-serif;
+    background: rgba(0,0,15);
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+}
+
+.back-button {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: rgba(217, 217, 217, 0.1);
+    border: 2px solid rgba(217, 217, 217, 0.3);
+    color: #d9d9d9;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.back-button:hover {
+    background: rgba(217, 217, 217, 0.2);
+    border-color: #d9d9d9;
+    transform: translateY(-2px);
+}
+
+.register-container {
+    background: #d9d9d9;
+    border-radius: 25px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(1, 12, 30, 0.3);
+    margin: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.register-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #010c1e, #010813, #010c1e);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+    min-height: 60px;
+}
+
+.logo-container h1 {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 2.5rem;
+    color: #010c1e;
+    margin: 0;
+    font-weight: 900;
+}
+
+.logo-subtitle {
+    color: #010813;
+    opacity: 0.7;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+.form-title {
+    text-align: center;
+    color: #010c1e;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    color: #010c1e;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: rgba(1, 8, 19, 0.05);
+    border: 2px solid rgba(1, 12, 30, 0.2);
+    border-radius: 12px;
+    color: #010c1e;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23010c1e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+    padding-right: 3rem;
+}
+
+.form-group input::placeholder {
+    color: rgba(1, 12, 30, 0.5);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #010c1e;
+    background: rgba(1, 8, 19, 0.1);
+    box-shadow: 0 0 20px rgba(1, 12, 30, 0.15);
+    transform: translateY(-2px);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(1, 12, 30, 0.6);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: #010c1e;
+}
+
+.form-options {
+    margin-bottom: 2rem;
+}
+
+.terms-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terms-check input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.terms-check label {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #010813;
+    font-weight: 400;
+}
+
+.terms-link {
+    color: #010c1e;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+.register-btn {
+    width: 100%;
+    background: #010c1e;
+    border: none;
+    padding: 1.2rem 2rem;
+    color: #d9d9d9;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.register-btn:hover {
+    transform: translateY(-3px);
+    background: #010813;
+    box-shadow: 0 10px 25px rgba(1, 12, 30, 0.4);
+}
+
+.register-btn:active {
+    transform: translateY(-1px);
+}
+
+.login-link {
+    text-align: center;
+    color: #010813;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+.login-link a {
+    color: #010c1e;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+    color: #010813;
+}
+
+.error-message {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.success-message {
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    color: #28a745;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .register-container {
+        padding: 2rem;
+        margin: 1rem;
+        max-width: none;
+    }
+
+    .back-button {
+        top: 20px;
+        left: 20px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    .logo-container h1 {
+        font-size: 2rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-container {
+        padding: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .register-btn {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+#logoPolaris {
+    width: 120px;
+    height: auto;
+    color: #d9d9d9;
+    background-color: #010c1e;
+}

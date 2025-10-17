@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Polaris - Recursos y eventos</title>
+    <title>Blog - Polaris</title>
     <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/recuryevents.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/articulos.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -20,12 +20,12 @@
     <nav class="navbar">
         <div class="nav-left" id="toggleButton">
             <label for="menu-toggle" class="menu-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-                <path id="menu-h" fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
-            </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                    <path id="menu-h" fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+                </svg>
             </label>
-        <a href="{{ url_for('index') }}" class="logo">
-            <svg id="logoPolaris" version="1.0" xmlns="http://www.w3.org/2000/svg"
+            <a href="{{ url_for('index') }}" class="logo">
+                <svg id="logoPolaris" version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width="1056.000000pt" height="500.000000pt" viewBox="0 0 1056.000000 498.000000"
                 preserveAspectRatio="xMidYMid meet">
 
@@ -296,8 +296,8 @@
                 <path d="M2774 403 l-41 -4 -16 -77 c-10 -43 -17 -81 -17 -85 0 -9 86 -9 158
                 0 l54 6 -6 56 c-13 111 -13 111 -54 109 -20 -1 -55 -3 -78 -5z"/>
                 </g>
-            </svg>
-        </a>
+                </svg>
+            </a>
         </div>
     </nav>
 
@@ -313,243 +313,373 @@
         </ul>
     </div>
 
-
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Recursos y Eventos</h1>
-            <p class="hero-subtitle">Descubre oportunidades, eventos y recursos que te ayudarán en tu camino profesional</p>
-        </div>
-        <div class="hero-decoration"></div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="resources-grid">
-            <!-- Artículos y consejos -->
-            <div class="resource-card" data-category="educational">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Artículos y Consejos</h3>
-                    <p>Blog con información útil sobre orientación vocacional, técnicas de estudio y desarrollo personal.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Blog actualizado</span>
-                        <span class="feature-tag">Tips diarios</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <a href="{{ url_for('articulos') }}" style="text-decoration: none;">
-                        <button class="action-btn">
-                            <span>Explorar</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Webinars y charlas -->
-            <div class="resource-card" data-category="events">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                        <line x1="8" y1="21" x2="16" y2="21"/>
-                        <line x1="12" y1="17" x2="12" y2="21"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Webinars y Charlas</h3>
-                    <p>Eventos educativos en vivo con expertos de diferentes industrias y universidades reconocidas.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">En vivo</span>
-                        <span class="feature-tag">Certificados</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="action-btn">
-                        <span>Ver eventos</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Feria de universidades -->
-            <div class="resource-card" data-category="universities">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 21h18"/>
-                        <path d="M5 21V7l8-4v18"/>
-                        <path d="M19 21V11l-6-4"/>
-                        <path d="M9 9v.01"/>
-                        <path d="M9 12v.01"/>
-                        <path d="M9 15v.01"/>
-                        <path d="M9 18v.01"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Feria de Universidades</h3>
-                    <p>Información sobre ferias presenciales y virtuales donde podrás conocer diferentes instituciones educativas.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Presencial</span>
-                        <span class="feature-tag">Virtual</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="action-btn">
-                        <span>Ver ferias</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Becas y financiamiento -->
-            <div class="resource-card" data-category="scholarships">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                        <path d="M9 12l2 2 4-4"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Becas y Financiamiento</h3>
-                    <p>Encuentra oportunidades de becas y opciones de financiación para tu educación superior.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Becas completas</span>
-                        <span class="feature-tag">Créditos</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="action-btn">
-                        <span>Buscar becas</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Clases y cursos -->
-            <div class="resource-card" data-category="courses">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Clases y Cursos</h3>
-                    <p>Información sobre cursos preparatorios, talleres especializados y programas de capacitación.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Online</span>
-                        <span class="feature-tag">Presencial</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="action-btn">
-                        <span>Ver cursos</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Recursos adicionales -->
-            <div class="resource-card" data-category="tools">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Herramientas y Recursos</h3>
-                    <p>Calculadoras de costos educativos, planificadores académicos y herramientas de productividad.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Gratuito</span>
-                        <span class="feature-tag">Útil</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="action-btn">
-                        <span>Usar herramientas</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Call to Action Section -->
-        <section class="cta-section">
-            <div class="cta-content">
-                <h2>¿Necesitas orientación personalizada?</h2>
-                <p>Aquí estamos para ayudarte a encontrar el camino ideal hacia tu futuro profesional</p>
-                <button class="cta-btn">
-                    <span>Contáctanos</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Email icon" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2.5" y="4.5" width="19" height="15" rx="2" ry="2"></rect>
-                        <path d="M3.5 7.5l8 6 8-6"></path>
-                    </svg>
-                </button>
+    <main>
+        <section class="blog-hero">
+            <div class="hero-content">
+                <h1>Blog y Recursos</h1>
+                <p>Artículos, videos y consejos para tu desarrollo personal y profesional</p>
             </div>
         </section>
+
+        <section class="blog-admin">
+            <button class="add-content-btn" id="addContentBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Agregar Contenido
+            </button>
+        </section>
+
+        <section class="blog-filters">
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="orientacion">Orientación Vocacional</button>
+                <button class="filter-btn" data-filter="estudio">Técnicas de Estudio</button>
+                <button class="filter-btn" data-filter="desarrollo">Desarrollo Personal</button>
+                <button class="filter-btn" data-filter="videos">Videos</button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar artículos...">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+        </section>
+
+        <section class="blog-content">
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Orientación Vocacional 1 -->
+                <article class="article-card" data-category="orientacion">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop" alt="Orientación Vocacional">
+                        <span class="article-badge">Orientación</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">15 de Octubre, 2025</span>
+                        <h3>Cómo elegir una carrera profesional</h3>
+                        <p>Aprende las estrategias clave para tomar una decisión informada: anticípate, identifica tus intereses, habla con profesionales y busca información sobre la oferta laboral y educativa.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                8 min
+                            </span>
+                            <a href="https://www.educ.ar/recursos/158690/orientacion-vocacional" target="_blank" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Técnicas de Estudio 1 -->
+                <article class="article-card" data-category="estudio">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&h=300&fit=crop" alt="Técnicas de Estudio">
+                        <span class="article-badge">Estudio</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">10 de Octubre, 2025</span>
+                        <h3>Método Pomodoro y técnicas de estudio</h3>
+                        <p>Descubre el método Pomodoro para mejorar la administración del tiempo y otras técnicas comprobadas para maximizar tu rendimiento académico.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                6 min
+                            </span>
+                            <a href="https://www.educaweb.com/noticia/2020/05/20/videos-orientar-como-construir-proyecto-vida-profesional-19191/" target="_blank" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Video Orientación Vocacional -->
+                <article class="article-card video-card" data-category="videos">
+                    <div class="article-image video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=300&fit=crop" alt="Video Orientación">
+                        <div class="play-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="white">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                        <span class="article-badge video-badge">Video</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">8 de Octubre, 2025</span>
+                        <h3>Proceso de toma de decisiones vocacionales</h3>
+                        <p>Serie de videos educativos que explican las fases del proceso de toma de decisiones cuando se elige una carrera universitaria o formación profesional.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                15 min
+                            </span>
+                            <a href="https://monicadizorienta.blogspot.com/2020/03/seleccion-de-videos-para-ayudarte-tomar.html" target="_blank" class="read-more">Ver video →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Desarrollo Personal -->
+                <article class="article-card" data-category="desarrollo">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop" alt="Desarrollo Personal">
+                        <span class="article-badge">Desarrollo</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">5 de Octubre, 2025</span>
+                        <h3>Autoconocimiento y proyecto de vida</h3>
+                        <p>La importancia del autoconocimiento en la construcción de tu proyecto de vida. Aprende a identificar tus intereses, habilidades y valores personales.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                7 min
+                            </span>
+                            <a href="https://www.menteyciencia.com/orientacion-vocacional-objetivo-tecnicas-y-limitaciones/" target="_blank" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Orientación Vocacional 2 -->
+                <article class="article-card" data-category="orientacion">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=500&h=300&fit=crop" alt="Test Vocacionales">
+                        <span class="article-badge">Orientación</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">1 de Octubre, 2025</span>
+                        <h3>Test de orientación vocacional: Guía completa</h3>
+                        <p>Conoce los diferentes tipos de test vocacionales como Holland y CHASIDE. Descubre cómo estas herramientas te ayudan a identificar carreras afines a tu perfil.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                10 min
+                            </span>
+                            <a href="https://es.indeed.com/orientacion-laboral/desarrollo-profesional/test-orientacion-vocacional" target="_blank" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Video Desarrollo Personal -->
+                <article class="article-card video-card" data-category="videos">
+                    <div class="article-image video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500&h=300&fit=crop" alt="Video Desarrollo">
+                        <div class="play-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="white">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                        <span class="article-badge video-badge">Video</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">28 de Septiembre, 2025</span>
+                        <h3>Cómo superar el miedo a elegir carrera</h3>
+                        <p>Videos inspiradores para superar tus miedos a fallar, perder el tiempo o defraudar a alguien. Aprende a tomar decisiones con confianza.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                12 min
+                            </span>
+                            <a href="https://orientacionesvocacion.com/" target="_blank" class="read-more">Ver video →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Orientación Vocacional 3 -->
+                <article class="article-card" data-category="orientacion">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&h=300&fit=crop" alt="Etapas Orientación">
+                        <span class="article-badge">Orientación</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">25 de Septiembre, 2025</span>
+                        <h3>Etapas del proceso de orientación vocacional</h3>
+                        <p>Descubre las etapas desde la investigación hasta la resolución: autoconocimiento, exploración del entorno, información sobre carreras y decisión final.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                9 min
+                            </span>
+                            <a href="https://cales.com.ar/etapas-del-proceso-de-orientacion-vocacional/" target="_blank" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Técnicas de Estudio 2 -->
+                <article class="article-card" data-category="estudio">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&h=300&fit=crop" alt="Hábitos de Estudio">
+                        <span class="article-badge">Estudio</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">20 de Septiembre, 2025</span>
+                        <h3>Hábitos de estudio para la vida universitaria</h3>
+                        <p>Aprende a desarrollar hábitos efectivos que te ayudarán no solo académicamente, sino también en tu salud física y mental como estudiante.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                8 min
+                            </span>
+                            <a href="https://parentesis.com/noticias/educacion/YouTube_te_ayuda_a_encontrar_tu_vocacion_y_preparar_examenes_de_admision_a_la_universidad" target="_blank" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Desarrollo Personal 2 -->
+                <article class="article-card" data-category="desarrollo">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&h=300&fit=crop" alt="Madurez Vocacional">
+                        <span class="article-badge">Desarrollo</span>
+                    </div>
+                    <div class="article-content">
+                        <span class="article-date">15 de Septiembre, 2025</span>
+                        <h3>Madurez vocacional y desarrollo del autoconcepto</h3>
+                        <p>Entiende cómo desarrollar tu madurez vocacional y fortalecer tu autoconcepto para tomar mejores decisiones sobre tu futuro profesional.</p>
+                        <div class="article-footer">
+                            <span class="article-read-time">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                11 min
+                            </span>
+                            <a href="https://psicologiajovenesadolescentes.com/orientacion-vocacional-y-educativa/" target="_blank" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Modal para agregar contenido -->
+        <div class="modal" id="addContentModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Agregar Nuevo Contenido</h2>
+                    <button class="close-modal" id="closeModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <form class="content-form" id="contentForm">
+                    <div class="form-group">
+                        <label for="contentType">Tipo de contenido</label>
+                        <select id="contentType" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="article">Artículo</option>
+                            <option value="video">Video</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentCategory">Categoría</label>
+                        <select id="contentCategory" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="orientacion">Orientación Vocacional</option>
+                            <option value="estudio">Técnicas de Estudio</option>
+                            <option value="desarrollo">Desarrollo Personal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentTitle">Título</label>
+                        <input type="text" id="contentTitle" placeholder="Título del artículo o video" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentDescription">Descripción</label>
+                        <textarea id="contentDescription" rows="4" placeholder="Breve descripción del contenido" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentUrl">URL del contenido</label>
+                        <input type="url" id="contentUrl" placeholder="https://..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentImage">URL de la imagen</label>
+                        <input type="url" id="contentImage" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentDuration">Duración de lectura/video (minutos)</label>
+                        <input type="number" id="contentDuration" min="1" placeholder="5" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
+                        <button type="submit" class="btn-submit">Publicar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
-<footer>
-    <div class="footer-container">
-        <div class="footer-section">
-            <h2 id="pol">Polaris</h2>
-            <p>¡Tu guía para el éxito!</p>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 id="pol">Polaris</h2>
+                <p>¡Tu guía para el éxito!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces rápidos</h3>
+                <ul>
+                    <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
+                    <li><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
+                    <li><a href="{{ url_for('blog') }}">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Información de contacto</h3>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.15 9.81a19.86 19.86 0 0 1-3.07-8.63A2 2 0 0 1 2.09 1h3a2 2 0 0 1 2 1.72c.13 1.21.5 2.39 1.08 3.47a2 2 0 0 1-.45 2.11L6.21 9.79a16 16 0 0 0 8 8l1.49-1.49a2 2 0 0 1 2.11-.45c1.08.58 2.26.95 3.47 1.08a2 2 0 0 1 1.72 2z"/>
+                        </svg>
+                        +57 333-333-3333
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
+                            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        polarishelpco@gmail.com
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Medellín, Colombia
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-section">
-            <h3>Enlaces rápidos</h3>
-            <ul>
-                <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
-                <li><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
-                <li><a href="{{ url_for('blog') }}">Blog</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Información de contacto</h3>
-            <ul>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.15 9.81a19.86 19.86 0 0 1-3.07-8.63A2 2 0 0 1 2.09 1h3a2 2 0 0 1 2 1.72c.13 1.21.5 2.39 1.08 3.47a2 2 0 0 1-.45 2.11L6.21 9.79a16 16 0 0 0 8 8l1.49-1.49a2 2 0 0 1 2.11-.45c1.08.58 2.26.95 3.47 1.08a2 2 0 0 1 1.72 2z"/>
-                    </svg>
-                    +57 333-333-3333
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    polarishelpco@gmail.com
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    Medellín, Colombia
-                </li>
-            </ul>
-        </div>
-    </div>
-    <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
-</footer>
+        <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
+    </footer>
 
     <script src="{{ url_for('static', path='js/clicmenu.js') }}"></script>
     <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
-
+    <script src="{{ url_for('static', path='js/blog.js') }}"></script>
 </body>
 </html>
