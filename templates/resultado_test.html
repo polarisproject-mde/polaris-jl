@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Polaris - Resultados del Test</title>
+    <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/resultado.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="stars"></canvas>
+    <input type="checkbox" id="menu-toggle" />
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="navbar">
+        <div class="nav-left" id="toggleButton">
+            <label for="menu-toggle" class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                    <path id="menu-h" fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+                </svg>
+            </label>
+            <a href="{{ url_for('index') }}" class="logo">
+                <!-- Tu SVG del logo aquí -->
+            </a>
+        </div>
+        <div class="nav-right">
+            {% if user %}
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <span>{{ user.nombre }}</span>
+                    </button>
+                </div>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="auth-nav-btn login-nav">
+                    <span>Iniciar</span>
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="menu" id="menu">
+        <ul class="list">
+            <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
+            <li class="list-i"><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
+            <li class="list-i"><a href="{{ url_for('universidades') }}">Universidades</a></li>
+            <li class="list-i"><a href="{{ url_for('blog') }}">Blog</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="resultado-container">
+            <div class="resultado-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <h1>¡Test Completado!</h1>
+                <p>Gracias por completar el test. Aquí están tus resultados.</p>
+            </div>
+
+            <div class="resultado-content">
+                <h2>Resumen de Respuestas</h2>
+                <div class="respuestas-grid">
+                    {% for key, value in respuestas.items() %}
+                    <div class="respuesta-item">
+                        <span class="respuesta-pregunta">{{ key }}</span>
+                        <span class="respuesta-valor">{{ value }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="acciones">
+                    <a href="{{ url_for('test-vocacional') }}" class="btn btn-primary">
+                        Realizar Otro Test
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                        Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 id="pol">Polaris</h2>
+                <p>¡Tu guía para el éxito!</p>
+            </div>
+        </div>
+        <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
+    </footer>
+
+    <script src="{{ url_for('static', path='js/clicmenu.js') }}"></script>
+    <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
+    <script src="{{ url_for('static', path='js/user-menu.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,776 @@
+/* HERO SECTION */
+.calculator-hero {
+    padding: 140px 20px 80px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(0,0,30,0.9) 0%, rgba(0,0,15,1) 100%);
+    position: relative;
+}
+
+.premium-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+    border-radius: 25px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+}
+
+.premium-badge svg {
+    fill: #000;
+}
+
+.calculator-hero .hero-content h1 {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 3.2rem;
+    color: #d9d9d9;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+.calculator-hero .hero-content p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.3rem;
+    color: rgba(217, 217, 217, 0.9);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .calculator-hero {
+        padding: 120px 20px 60px;
+    }
+
+    .calculator-hero .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .calculator-hero .hero-content p {
+        font-size: 1rem;
+    }
+}
+
+/* CALCULATOR CONTAINER */
+.calculator-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px 100px;
+}
+
+/* STEP SECTIONS */
+.step-section {
+    margin-bottom: 50px;
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #d9d9d9, #f0f0f0);
+    color: #010813;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(217, 217, 217, 0.3);
+}
+
+.step-info h2 {
+    font-family: "Archivo Black", sans-serif;
+    color: #d9d9d9;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step-info p {
+    font-family: "Montserrat", sans-serif;
+    color: rgba(217, 217, 217, 0.7);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* FORM CARD */
+.form-card {
+    background: rgba(26, 26, 46, 0.9);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(217, 217, 217, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .form-card {
+        padding: 30px 20px;
+    }
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    color: #d9d9d9;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    background: rgba(0, 0, 15, 0.6);
+    border: 2px solid rgba(217, 217, 217, 0.2);
+    border-radius: 12px;
+    color: #d9d9d9;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #d9d9d9;
+    background: rgba(0, 0, 15, 0.8);
+    box-shadow: 0 0 0 3px rgba(217, 217, 217, 0.1);
+}
+
+.form-group input::placeholder {
+    color: rgba(217, 217, 217, 0.4);
+}
+
+/* FUNDING SOURCES */
+.funding-source {
+    background: rgba(0, 0, 15, 0.4);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(217, 217, 217, 0.1);
+    transition: all 0.3s ease;
+}
+
+.funding-source:hover {
+    border-color: rgba(217, 217, 217, 0.2);
+}
+
+.funding-header {
+    margin-bottom: 15px;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #d9d9d9;
+}
+
+.toggle-label input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #d9d9d9;
+}
+
+.funding-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(217, 217, 217, 0.1);
+}
+
+/* SCENARIO OPTIONS */
+.scenario-option {
+    background: rgba(0, 0, 15, 0.4);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(217, 217, 217, 0.1);
+}
+
+.scenario-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(217, 217, 217, 0.1);
+}
+
+/* ACTION SECTION */
+.action-section {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.calculate-btn {
+    padding: 20px 50px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: linear-gradient(135deg, #d9d9d9, #f0f0f0);
+    color: #010813;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 30px rgba(217, 217, 217, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.calculate-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(217, 217, 217, 0.6);
+}
+
+.calculate-btn:active {
+    transform: translateY(-2px);
+}
+
+/* RESULTS SECTION */
+.results-section {
+    margin-top: 80px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.results-card {
+    background: rgba(26, 26, 46, 0.95);
+    border-radius: 25px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(217, 217, 217, 0.15);
+}
+
+.results-card h2 {
+    font-family: "Archivo Black", sans-serif;
+    color: #d9d9d9;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* SUMMARY CARD */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.summary-item {
+    background: rgba(0, 0, 15, 0.5);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    border: 2px solid rgba(217, 217, 217, 0.1);
+    transition: all 0.3s ease;
+}
+
+.summary-item:hover {
+    transform: translateY(-5px);
+    border-color: rgba(217, 217, 217, 0.3);
+    box-shadow: 0 10px 30px rgba(217, 217, 217, 0.1);
+}
+
+.summary-item.highlight {
+    background: linear-gradient(135deg, rgba(217, 217, 217, 0.2), rgba(240, 240, 240, 0.1));
+    border: 2px solid rgba(217, 217, 217, 0.4);
+}
+
+.summary-label {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    color: rgba(217, 217, 217, 0.7);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-value {
+    display: block;
+    font-family: "Archivo Black", sans-serif;
+    color: #d9d9d9;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.summary-item.highlight .summary-value {
+    font-size: 2.5rem;
+    color: #f0f0f0;
+}
+
+.summary-value.deficit {
+    color: #ff6b6b;
+}
+
+.summary-subtitle {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    color: rgba(217, 217, 217, 0.5);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* DISTRIBUTION CHART */
+.distribution-chart {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+
+.distribution-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Montserrat", sans-serif;
+    color: #d9d9d9;
+    font-size: 0.95rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+/* TIMELINE */
+.timeline-container {
+    position: relative;
+    padding: 30px 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-marker {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #d9d9d9, #f0f0f0);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: #010813;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-marker.critical {
+    background: linear-gradient(135deg, #ff6b6b, #ff5252);
+    color: #fff;
+}
+
+.timeline-content {
+    flex: 1;
+    background: rgba(0, 0, 15, 0.4);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid rgba(217, 217, 217, 0.1);
+}
+
+.timeline-title {
+    font-family: "Montserrat", sans-serif;
+    color: #d9d9d9;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.timeline-description {
+    font-family: "Montserrat", sans-serif;
+    color: rgba(217, 217, 217, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.timeline-amount {
+    font-family: "Montserrat", sans-serif;
+    color: #d9d9d9;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+/* SAVINGS CARD */
+.savings-strategy {
+    background: rgba(0, 0, 15, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(217, 217, 217, 0.1);
+}
+
+.strategy-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.strategy-name {
+    font-family: "Montserrat", sans-serif;
+    color: #d9d9d9;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.strategy-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.strategy-badge.conservative {
+    background: rgba(100, 150, 255, 0.2);
+    color: #6496ff;
+}
+
+.strategy-badge.moderate {
+    background: rgba(255, 200, 100, 0.2);
+    color: #ffc864;
+}
+
+.strategy-badge.aggressive {
+    background: rgba(255, 100, 100, 0.2);
+    color: #ff6464;
+}
+
+.strategy-details {
+    display: grid;
+    gap: 12px;
+}
+
+.strategy-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Montserrat", sans-serif;
+    color: rgba(217, 217, 217, 0.8);
+    font-size: 0.95rem;
+}
+
+.strategy-row strong {
+    color: #d9d9d9;
+    font-weight: 700;
+}
+
+/* LOAN CARD */
+.loan-info {
+    background: rgba(0, 0, 15, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(217, 217, 217, 0.1);
+}
+
+.loan-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.1);
+    font-family: "Montserrat", sans-serif;
+}
+
+.loan-detail:last-child {
+    border-bottom: none;
+}
+
+.loan-label {
+    color: rgba(217, 217, 217, 0.7);
+    font-size: 1rem;
+}
+
+.loan-value {
+    color: #d9d9d9;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* SCENARIOS CARD */
+.scenario-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.scenario-box {
+    background: rgba(0, 0, 15, 0.5);
+    border-radius: 15px;
+    padding: 25px;
+    border: 2px solid rgba(217, 217, 217, 0.1);
+}
+
+.scenario-box.warning {
+    border-color: rgba(255, 200, 100, 0.5);
+}
+
+.scenario-name {
+    font-family: "Montserrat", sans-serif;
+    color: #d9d9d9;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.scenario-impact {
+    font-family: "Montserrat", sans-serif;
+    color: rgba(217, 217, 217, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* RECOMMENDATIONS */
+.recommendation-item {
+    background: rgba(0, 0, 15, 0.4);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid #d9d9d9;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.recommendation-icon {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, rgba(217, 217, 217, 0.2), rgba(240, 240, 240, 0.1));
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recommendation-icon svg {
+    stroke: #d9d9d9;
+}
+
+.recommendation-content {
+    flex: 1;
+}
+
+.recommendation-title {
+    font-family: "Montserrat", sans-serif;
+    color: #d9d9d9;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.recommendation-text {
+    font-family: "Montserrat", sans-serif;
+    color: rgba(217, 217, 217, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.recommendation-item.critical {
+    border-left-color: #ff6b6b;
+}
+
+.recommendation-item.success {
+    border-left-color: #4caf50;
+}
+
+/* RESULTS ACTIONS */
+.results-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.action-btn {
+    padding: 16px 35px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+}
+
+.reset-btn {
+    background: transparent;
+    color: #d9d9d9;
+    border: 2px solid #d9d9d9;
+}
+
+.reset-btn:hover {
+    background: #d9d9d9;
+    color: #010813;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(217, 217, 217, 0.3);
+}
+
+.export-btn {
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+}
+
+.export-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.5);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.timeline-item {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .calculator-container {
+        padding: 30px 15px 80px;
+    }
+
+    .step-header {
+        gap: 15px;
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .step-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .results-card {
+        padding: 25px 20px;
+    }
+
+    .results-card h2 {
+        font-size: 1.6rem;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-value {
+        font-size: 1.6rem;
+    }
+
+    .summary-item.highlight .summary-value {
+        font-size: 2rem;
+    }
+
+    .results-actions {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .calculate-btn {
+        padding: 16px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* INPUT NUMBER STYLING */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}

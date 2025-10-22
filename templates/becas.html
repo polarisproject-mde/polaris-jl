@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Blog - Polaris</title>
+    <title>Becas y Financiamiento - Polaris</title>
     <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/articulos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/becas.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -17,15 +17,15 @@
 
     <div class="overlay" id="overlay"></div>
 
-<nav class="navbar">
-    <div class="nav-left" id="toggleButton">
-        <label for="menu-toggle" class="menu-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-                <path id="menu-h" fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
-            </svg>
-        </label>
-        <a href="{{ url_for('index') }}" class="logo">
-            <svg id="logoPolaris" version="1.0" xmlns="http://www.w3.org/2000/svg"
+    <nav class="navbar">
+        <div class="nav-left" id="toggleButton">
+            <label for="menu-toggle" class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                    <path id="menu-h" fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+                </svg>
+            </label>
+            <a href="{{ url_for('index') }}" class="logo">
+                <svg id="logoPolaris" version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width="1056.000000pt" height="500.000000pt" viewBox="0 0 1056.000000 498.000000"
                 preserveAspectRatio="xMidYMid meet">
 
@@ -296,88 +296,86 @@
                 <path d="M2774 403 l-41 -4 -16 -77 c-10 -43 -17 -81 -17 -85 0 -9 86 -9 158
                 0 l54 6 -6 56 c-13 111 -13 111 -54 109 -20 -1 -55 -3 -78 -5z"/>
                 </g>
-            </svg>
-        </a>
-    </div>
+                </svg>
+            </a>
+        </div>
 
-    <div class="nav-right">
-        {% if user %}
-            <!-- Usuario autenticado - Mostrar menú de usuario -->
-            <div class="user-menu">
-                <button class="user-menu-btn" id="userMenuBtn">
+        <div class="nav-right">
+            {% if user %}
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <span>{{ user.nombre }}</span>
+                        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="{{ url_for('perfil') }}" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            Mi Perfil
+                        </a>
+                        <a href="{{ url_for('resultados') }}" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                            Resultados del Test
+                        </a>
+                        <a href="{{ url_for('actualizar_info') }}" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            Actualizar Información
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ url_for('logout') }}" class="dropdown-item logout">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                <polyline points="16 17 21 12 16 7"/>
+                                <line x1="21" y1="12" x2="9" y2="12"/>
+                            </svg>
+                            Cerrar Sesión
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="auth-nav-btn login-nav">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                        <polyline points="10,17 15,12 10,7"/>
+                        <line x1="15" y1="12" x2="3" y2="12"/>
+                    </svg>
+                    <span>Iniciar</span>
+                </a>
+                <a href="{{ url_for('register') }}" class="auth-nav-btn register-nav">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
                     </svg>
-                    <span>{{ user.nombre }}</span>
-                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-
-                <div class="user-dropdown" id="userDropdown">
-                    <a href="{{ url_for('perfil') }}" class="dropdown-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                        Mi Perfil
-                    </a>
-                    <a href="{{ url_for('resultados') }}" class="dropdown-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10 9 9 9 8 9"/>
-                        </svg>
-                        Resultados del Test
-                    </a>
-                    <a href="{{ url_for('actualizar_info') }}" class="dropdown-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                        Actualizar Información
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ url_for('logout') }}" class="dropdown-item logout">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                            <polyline points="16 17 21 12 16 7"/>
-                            <line x1="21" y1="12" x2="9" y2="12"/>
-                        </svg>
-                        Cerrar Sesión
-                    </a>
-                </div>
-            </div>
-        {% else %}
-            <!-- Usuario NO autenticado - Mostrar botones de login/registro -->
-            <a href="{{ url_for('login') }}" class="auth-nav-btn login-nav">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                    <polyline points="10,17 15,12 10,7"/>
-                    <line x1="15" y1="12" x2="3" y2="12"/>
-                </svg>
-                <span>Iniciar</span>
-            </a>
-            <a href="{{ url_for('register') }}" class="auth-nav-btn register-nav">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
-                <span>Registrarse</span>
-            </a>
-        {% endif %}
-    </div>
-</nav>
+                    <span>Registrarse</span>
+                </a>
+            {% endif %}
+        </div>
+    </nav>
 
     <div class="menu" id="menu">
         <ul class="list">
             <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
             <li class="list-i"><a href="{{ url_for('universidades') }}">Universidades</a></li>
-            <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
+            <li class="list-i"><a href="{{ url_for('guiav') }}">Guía Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
             <li class="list-i"><a href="{{ url_for('fechasimp') }}">Fechas importantes</a></li>
             <li class="list-i"><a href="{{ url_for('blog') }}">Blog</a></li>
@@ -385,33 +383,32 @@
     </div>
 
     <main>
-        <section class="blog-hero">
+        <section class="becas-hero">
             <div class="hero-content">
-                <h1>Blog y Recursos</h1>
-                <p>Artículos, videos y consejos para tu desarrollo personal y profesional</p>
+                <h1>Becas y Financiamiento</h1>
+                <p>Encuentra oportunidades de becas y opciones de financiación para tu educación superior</p>
             </div>
         </section>
 
-        <section class="blog-admin">
-            <button class="add-content-btn" id="addContentBtn">
+        <section class="becas-admin">
+            <button class="add-beca-btn" id="addBecaBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                Agregar Contenido
+                Agregar Beca
             </button>
         </section>
 
-        <section class="blog-filters">
+        <section class="becas-filters">
             <div class="filter-container">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="orientacion">Orientación Vocacional</button>
-                <button class="filter-btn" data-filter="estudio">Técnicas de Estudio</button>
-                <button class="filter-btn" data-filter="desarrollo">Desarrollo Personal</button>
-                <button class="filter-btn" data-filter="videos">Videos</button>
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="completas">Becas Completas</button>
+                <button class="filter-btn" data-filter="creditos">Créditos</button>
+                <button class="filter-btn" data-filter="parciales">Becas Parciales</button>
             </div>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Buscar artículos...">
+                <input type="text" id="searchInput" placeholder="Buscar becas...">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -419,232 +416,273 @@
             </div>
         </section>
 
-        <section class="blog-content">
-            <div class="articles-grid" id="articlesGrid">
-                <!-- Orientación Vocacional 1 -->
-                <article class="article-card" data-category="orientacion">
-                    <div class="article-image">
-                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop" alt="Orientación Vocacional">
-                        <span class="article-badge">Orientación</span>
-                    </div>
-                    <div class="article-content">
-                        <span class="article-date">15 de Octubre, 2025</span>
-                        <h3>Cómo elegir una carrera profesional</h3>
-                        <p>Aprende las estrategias clave para tomar una decisión informada: anticípate, identifica tus intereses, habla con profesionales y busca información sobre la oferta laboral y educativa.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                8 min
-                            </span>
-                            <a href="https://www.educ.ar/recursos/158690/orientacion-vocacional" target="_blank" class="read-more">Leer más →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Técnicas de Estudio 1 -->
-                <article class="article-card" data-category="estudio">
-                    <div class="article-image">
-                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&h=300&fit=crop" alt="Técnicas de Estudio">
-                        <span class="article-badge">Estudio</span>
-                    </div>
-                    <div class="article-content">
-                        <span class="article-date">10 de Octubre, 2025</span>
-                        <h3>Método Pomodoro y técnicas de estudio</h3>
-                        <p>Descubre el método Pomodoro para mejorar la administración del tiempo y otras técnicas comprobadas para maximizar tu rendimiento académico.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                6 min
-                            </span>
-                            <a href="https://www.educaweb.com/noticia/2020/05/20/videos-orientar-como-construir-proyecto-vida-profesional-19191/" target="_blank" class="read-more">Leer más →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Video Orientación Vocacional -->
-                <article class="article-card video-card" data-category="videos">
-                    <div class="article-image video-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=300&fit=crop" alt="Video Orientación">
-                        <div class="play-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        <section class="becas-content">
+            <div class="becas-grid" id="becasGrid">
+                <!-- Beca Sapiencia -->
+                <article class="beca-card" data-category="completas">
+                    <div class="beca-header">
+                        <div class="beca-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
                             </svg>
                         </div>
-                        <span class="article-badge video-badge">Video</span>
+                        <span class="beca-badge completa">Beca Completa</span>
                     </div>
-                    <div class="article-content">
-                        <span class="article-date">8 de Octubre, 2025</span>
-                        <h3>Proceso de toma de decisiones vocacionales</h3>
-                        <p>Serie de videos educativos que explican las fases del proceso de toma de decisiones cuando se elige una carrera universitaria o formación profesional.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="beca-content">
+                        <h3>Becas Sapiencia</h3>
+                        <p class="beca-organization">Alcaldía de Medellín</p>
+                        <p class="beca-description">Becas completas para estudios de pregrado, posgrado y programas técnicos y tecnológicos en instituciones de educación superior para jóvenes de Medellín.</p>
+                        <div class="beca-details">
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <span>Medellín</span>
+                            </div>
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                15 min
-                            </span>
-                            <a href="https://monicadizorienta.blogspot.com/2020/03/seleccion-de-videos-para-ayudarte-tomar.html" target="_blank" class="read-more">Ver video →</a>
+                                <span>Todo el año</span>
+                            </div>
                         </div>
+                    </div>
+                    <div class="beca-footer">
+                        <a href="https://sapiencia.gov.co/" target="_blank" class="beca-link">
+                            Más información
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <!-- Desarrollo Personal -->
-                <article class="article-card" data-category="desarrollo">
-                    <div class="article-image">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop" alt="Desarrollo Personal">
-                        <span class="article-badge">Desarrollo</span>
-                    </div>
-                    <div class="article-content">
-                        <span class="article-date">5 de Octubre, 2025</span>
-                        <h3>Autoconocimiento y proyecto de vida</h3>
-                        <p>La importancia del autoconocimiento en la construcción de tu proyecto de vida. Aprende a identificar tus intereses, habilidades y valores personales.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                7 min
-                            </span>
-                            <a href="https://www.menteyciencia.com/orientacion-vocacional-objetivo-tecnicas-y-limitaciones/" target="_blank" class="read-more">Leer más →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Orientación Vocacional 2 -->
-                <article class="article-card" data-category="orientacion">
-                    <div class="article-image">
-                        <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=500&h=300&fit=crop" alt="Test Vocacionales">
-                        <span class="article-badge">Orientación</span>
-                    </div>
-                    <div class="article-content">
-                        <span class="article-date">1 de Octubre, 2025</span>
-                        <h3>Test de orientación vocacional: Guía completa</h3>
-                        <p>Conoce los diferentes tipos de test vocacionales como Holland y CHASIDE. Descubre cómo estas herramientas te ayudan a identificar carreras afines a tu perfil.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                10 min
-                            </span>
-                            <a href="https://es.indeed.com/orientacion-laboral/desarrollo-profesional/test-orientacion-vocacional" target="_blank" class="read-more">Leer más →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Video Desarrollo Personal -->
-                <article class="article-card video-card" data-category="videos">
-                    <div class="article-image video-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500&h=300&fit=crop" alt="Video Desarrollo">
-                        <div class="play-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                <!-- Beca Argos -->
+                <article class="beca-card" data-category="completas">
+                    <div class="beca-header">
+                        <div class="beca-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
                             </svg>
                         </div>
-                        <span class="article-badge video-badge">Video</span>
+                        <span class="beca-badge completa">Beca Completa</span>
                     </div>
-                    <div class="article-content">
-                        <span class="article-date">28 de Septiembre, 2025</span>
-                        <h3>Cómo superar el miedo a elegir carrera</h3>
-                        <p>Videos inspiradores para superar tus miedos a fallar, perder el tiempo o defraudar a alguien. Aprende a tomar decisiones con confianza.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="beca-content">
+                        <h3>Becas Argos</h3>
+                        <p class="beca-organization">Grupo Argos</p>
+                        <p class="beca-description">Programa de becas para estudiantes destacados en áreas de ingeniería, arquitectura y carreras afines, con enfoque en infraestructura y desarrollo sostenible.</p>
+                        <div class="beca-details">
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <span>Nacional</span>
+                            </div>
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                12 min
-                            </span>
-                            <a href="https://orientacionesvocacion.com/" target="_blank" class="read-more">Ver video →</a>
+                                <span>Convocatoria anual</span>
+                            </div>
                         </div>
+                    </div>
+                    <div class="beca-footer">
+                        <a href="https://argosau.b2clogin.com/argosau.onmicrosoft.com/b2c_1_fundaciongrupoargos_becarios_iniciosesion_registro_prd/oauth2/v2.0/authorize?client_id=c6814626-144b-43be-a85b-f63838cadeb5&scope=openid%20profile%20offline_access&redirect_uri=https%3A%2F%2Fbecas.fungrupoargos.com%2F&client-request-id=019a0d24-3e2a-70a8-a870-cea8d9f70d6d&response_mode=fragment&response_type=code&x-client-SKU=msal.js.browser&x-client-VER=3.24.0&client_info=1&code_challenge=0LvDVATfcLrS8lE94L-m-NkwRZqx6P8krxV8JXx1xRs&code_challenge_method=S256&nonce=019a0d24-3e2c-7738-8b5c-a2d7f2f438e7&state=eyJpZCI6IjAxOWEwZDI0LTNlMmMtNzA4OS1hZWM3LWYyYjk0NWM4YmYxNSIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicmVkaXJlY3QifX0%3D" target="_blank" class="beca-link">
+                            Más información
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <!-- Orientación Vocacional 3 -->
-                <article class="article-card" data-category="orientacion">
-                    <div class="article-image">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&h=300&fit=crop" alt="Etapas Orientación">
-                        <span class="article-badge">Orientación</span>
+                <!-- Fundación Vélez Reyes -->
+                <article class="beca-card" data-category="completas">
+                    <div class="beca-header">
+                        <div class="beca-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                        </div>
+                        <span class="beca-badge completa">Beca Completa</span>
                     </div>
-                    <div class="article-content">
-                        <span class="article-date">25 de Septiembre, 2025</span>
-                        <h3>Etapas del proceso de orientación vocacional</h3>
-                        <p>Descubre las etapas desde la investigación hasta la resolución: autoconocimiento, exploración del entorno, información sobre carreras y decisión final.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="beca-content">
+                        <h3>Fundación Vélez Reyes</h3>
+                        <p class="beca-organization">Fundación Vélez Reyes</p>
+                        <p class="beca-description">Becas para estudiantes de bajos recursos con excelente rendimiento académico para estudios universitarios en instituciones reconocidas de Colombia.</p>
+                        <div class="beca-details">
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <span>Antioquia</span>
+                            </div>
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                9 min
-                            </span>
-                            <a href="https://cales.com.ar/etapas-del-proceso-de-orientacion-vocacional/" target="_blank" class="read-more">Leer más →</a>
+                                <span>Semestral</span>
+                            </div>
                         </div>
+                    </div>
+                    <div class="beca-footer">
+                        <a href="https://velezreyesmas.com/proyectos/becas-tech/" target="_blank" class="beca-link">
+                            Más información
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <!-- Técnicas de Estudio 2 -->
-                <article class="article-card" data-category="estudio">
-                    <div class="article-image">
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&h=300&fit=crop" alt="Hábitos de Estudio">
-                        <span class="article-badge">Estudio</span>
+                <!-- ICETEX Crédito -->
+                <article class="beca-card" data-category="creditos">
+                    <div class="beca-header">
+                        <div class="beca-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                            </svg>
+                        </div>
+                        <span class="beca-badge credito">Crédito</span>
                     </div>
-                    <div class="article-content">
-                        <span class="article-date">20 de Septiembre, 2025</span>
-                        <h3>Hábitos de estudio para la vida universitaria</h3>
-                        <p>Aprende a desarrollar hábitos efectivos que te ayudarán no solo académicamente, sino también en tu salud física y mental como estudiante.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="beca-content">
+                        <h3>ICETEX</h3>
+                        <p class="beca-organization">Instituto Colombiano de Crédito Educativo</p>
+                        <p class="beca-description">Créditos educativos para pregrado, posgrado y programas técnicos con bajas tasas de interés y facilidades de pago para estudiantes colombianos.</p>
+                        <div class="beca-details">
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <span>Nacional</span>
+                            </div>
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                8 min
-                            </span>
-                            <a href="https://parentesis.com/noticias/educacion/YouTube_te_ayuda_a_encontrar_tu_vocacion_y_preparar_examenes_de_admision_a_la_universidad" target="_blank" class="read-more">Leer más →</a>
+                                <span>Permanente</span>
+                            </div>
                         </div>
+                    </div>
+                    <div class="beca-footer">
+                        <a href="https://web.icetex.gov.co/becas" target="_blank" class="beca-link">
+                            Más información
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <!-- Desarrollo Personal 2 -->
-                <article class="article-card" data-category="desarrollo">
-                    <div class="article-image">
-                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&h=300&fit=crop" alt="Madurez Vocacional">
-                        <span class="article-badge">Desarrollo</span>
+                <!-- Generación E -->
+                <article class="beca-card" data-category="completas">
+                    <div class="beca-header">
+                        <div class="beca-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                        </div>
+                        <span class="beca-badge completa">Beca Completa</span>
                     </div>
-                    <div class="article-content">
-                        <span class="article-date">15 de Septiembre, 2025</span>
-                        <h3>Madurez vocacional y desarrollo del autoconcepto</h3>
-                        <p>Entiende cómo desarrollar tu madurez vocacional y fortalecer tu autoconcepto para tomar mejores decisiones sobre tu futuro profesional.</p>
-                        <div class="article-footer">
-                            <span class="article-read-time">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="beca-content">
+                        <h3>Generación E</h3>
+                        <p class="beca-organization">Ministerio de Educación Nacional</p>
+                        <p class="beca-description">Programa de acceso y permanencia para estudiantes de estratos 1, 2 y 3 que cubre matrícula y subsidio de sostenimiento para educación superior.</p>
+                        <div class="beca-details">
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <span>Nacional</span>
+                            </div>
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                11 min
-                            </span>
-                            <a href="https://psicologiajovenesadolescentes.com/orientacion-vocacional-y-educativa/" target="_blank" class="read-more">Leer más →</a>
+                                <span>Semestral</span>
+                            </div>
                         </div>
+                    </div>
+                    <div class="beca-footer">
+                        <a href="https://web.icetex.gov.co/es/-/generacion-e-excelencia-4ta-convocatoria" target="_blank" class="beca-link">
+                            Más información
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Ser Pilo Paga (Histórica) -->
+                <article class="beca-card" data-category="parciales">
+                    <div class="beca-header">
+                        <div class="beca-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                        </div>
+                        <span class="beca-badge parcial">Beca Parcial</span>
+                    </div>
+                    <div class="beca-content">
+                        <h3>Becas Universitarias Privadas</h3>
+                        <p class="beca-organization">Universidades Privadas Colombia</p>
+                        <p class="beca-description">Diferentes universidades privadas ofrecen becas parciales por mérito académico, deportivo o socioeconómico. Consulta directamente en cada institución.</p>
+                        <div class="beca-details">
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                <span>Nacional</span>
+                            </div>
+                            <div class="detail-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>Variable</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="beca-footer">
+                        <a href="https://www.mineducacion.gov.co/portal/Educacion-superior/Informacion-Destacada/196246:Becas" target="_blank" class="beca-link">
+                            Más información
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- Modal para agregar contenido -->
-        <div class="modal" id="addContentModal">
+        <!-- Modal para agregar beca -->
+        <div class="modal" id="addBecaModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Agregar Nuevo Contenido</h2>
+                    <h2>Agregar Nueva Beca</h2>
                     <button class="close-modal" id="closeModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -652,54 +690,50 @@
                         </svg>
                     </button>
                 </div>
-                <form class="content-form" id="contentForm">
+                <form class="beca-form" id="becaForm">
                     <div class="form-group">
-                        <label for="contentType">Tipo de contenido</label>
-                        <select id="contentType" required>
+                        <label for="becaNombre">Nombre de la Beca</label>
+                        <input type="text" id="becaNombre" placeholder="Ej: Becas Sapiencia" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="becaOrganizacion">Organización</label>
+                        <input type="text" id="becaOrganizacion" placeholder="Ej: Alcaldía de Medellín" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="becaTipo">Tipo de Beca</label>
+                        <select id="becaTipo" required>
                             <option value="">Seleccionar...</option>
-                            <option value="article">Artículo</option>
-                            <option value="video">Video</option>
+                            <option value="completas">Beca Completa</option>
+                            <option value="creditos">Crédito</option>
+                            <option value="parciales">Beca Parcial</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="contentCategory">Categoría</label>
-                        <select id="contentCategory" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="orientacion">Orientación Vocacional</option>
-                            <option value="estudio">Técnicas de Estudio</option>
-                            <option value="desarrollo">Desarrollo Personal</option>
-                        </select>
+                        <label for="becaDescripcion">Descripción</label>
+                        <textarea id="becaDescripcion" rows="4" placeholder="Descripción de la beca, requisitos principales, etc." required></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="contentTitle">Título</label>
-                        <input type="text" id="contentTitle" placeholder="Título del artículo o video" required>
+                        <label for="becaUbicacion">Ubicación</label>
+                        <input type="text" id="becaUbicacion" placeholder="Ej: Medellín, Nacional, Antioquia" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="contentDescription">Descripción</label>
-                        <textarea id="contentDescription" rows="4" placeholder="Breve descripción del contenido" required></textarea>
+                        <label for="becaConvocatoria">Periodo de Convocatoria</label>
+                        <input type="text" id="becaConvocatoria" placeholder="Ej: Semestral, Todo el año, Anual" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="contentUrl">URL del contenido</label>
-                        <input type="url" id="contentUrl" placeholder="https://..." required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="contentImage">URL de la imagen</label>
-                        <input type="url" id="contentImage" placeholder="https://...">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="contentDuration">Duración de lectura/video (minutos)</label>
-                        <input type="number" id="contentDuration" min="1" placeholder="5" required>
+                        <label for="becaUrl">URL de información</label>
+                        <input type="url" id="becaUrl" placeholder="https://..." required>
                     </div>
 
                     <div class="form-actions">
                         <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
-                        <button type="submit" class="btn-submit">Publicar</button>
+                        <button type="submit" class="btn-submit">Publicar Beca</button>
                     </div>
                 </form>
             </div>
@@ -751,7 +785,7 @@
 
     <script src="{{ url_for('static', path='js/clicmenu.js') }}"></script>
     <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
-    <script src="{{ url_for('static', path='js/blog.js') }}"></script>
+    <script src="{{ url_for('static', path='js/becas.js') }}"></script>
     <script src="{{ url_for('static', path='js/user-menu.js') }}"></script>
 
 </body>
