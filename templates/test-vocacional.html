@@ -374,7 +374,7 @@
     <div class="menu" id="menu">
         <ul class="list">
             <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
-            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas</a></li>
             <li class="list-i"><a href="{{ url_for('calculadora') }}">Calculadora</a></li>
             <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
@@ -485,8 +485,51 @@
     <div class="my-results-section">
         <h2>📊 Mis Resultados</h2>
         <p>Revisa y analiza todos los tests que has completado</p>
-        <a href="#" class="btn-results">Ver mis resultados</a>
+        <a href="{{ url_for('resultados') }}" class="btn-results">Ver mis resultados</a>
     </div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h2 id="pol">Polaris</h2>
+            <p>¡Tu guía para el éxito!</p>
+        </div>
+        <div class="footer-section">
+            <h3>Enlaces rápidos</h3>
+            <ul>
+                <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
+                <li><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+                <li><a href="{{ url_for('blog') }}">Blog</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Información de contacto</h3>
+            <ul>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.15 9.81a19.86 19.86 0 0 1-3.07-8.63A2 2 0 0 1 2.09 1h3a2 2 0 0 1 2 1.72c.13 1.21.5 2.39 1.08 3.47a2 2 0 0 1-.45 2.11L6.21 9.79a16 16 0 0 0 8 8l1.49-1.49a2 2 0 0 1 2.11-.45c1.08.58 2.26.95 3.47 1.08a2 2 0 0 1 1.72 2z"/>
+                    </svg>
+                    +57 333-333-3333
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
+                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    polarishelpco@gmail.com
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    Medellín, Colombia
+                </li>
+            </ul>
+        </div>
+    </div>
+    <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
+</footer>
 
     <script src="{{ url_for('static', path='js/clicmenu.js') }}"></script>
     <script src="{{ url_for('static', path='js/fondo.js') }}"></script>

@@ -12,13 +12,13 @@ from datetime import datetime
 import random
 import json
 from typing import Dict, List, Tuple
+import os
 
 from db import get_db
 
 app = FastAPI()
 
-# 🔒 Middleware de sesiones
-app.add_middleware(SessionMiddleware, secret_key=secrets.token_hex(32))
+SECRET_KEY = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
 # Configuración de templates y archivos estáticos
 templates = Jinja2Templates(directory="templates")
@@ -2665,10 +2665,18 @@ async def login_post(
         result = db.execute(query, {"gmail": Gmail, "pwd": contraseña}).fetchone()
 
         if result:
+            # 🔧 FIX: Guardar sesión de forma más explícita
+            request.session.clear()  # Limpiar sesión anterior
             request.session["user_id"] = result[0]
             request.session["user_nombre"] = result[1]
             request.session["user_gmail"] = result[2]
             request.session["user_rol"] = result[3]
+            request.session["logged_in"] = True  # Flag adicional
+            
+            # 🔧 FIX: Asegurar que la sesión se guarde
+            request.session.update(request.session)
+            
+            print(f"✅ Login exitoso - User ID: {result[0]}, Nombre: {result[1]}")
             
             return RedirectResponse(url="/", status_code=303)
         else:
@@ -2678,6 +2686,8 @@ async def login_post(
             )
     except Exception as e:
         print(f"❌ Error en login: {e}")
+        import traceback
+        traceback.print_exc()
         return templates.TemplateResponse(
             "login.html",
             {"request": request, "error": "Error al iniciar sesión"}
@@ -2830,9 +2840,11 @@ async def actualizar_info_post(
         
         db.commit()
         
+        # 🔧 FIX: Actualizar sesión correctamente
         request.session["user_nombre"] = nombre
         request.session["user_gmail"] = email
         request.session["user_rol"] = rol
+        request.session.update(request.session)  # 👈 AGREGAR ESTA LÍNEA
         
         user["nombre"] = nombre
         user["gmail"] = email

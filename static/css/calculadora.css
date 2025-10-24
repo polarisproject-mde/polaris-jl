@@ -2,24 +2,7 @@
 .calculator-hero {
     padding: 140px 20px 80px;
     text-align: center;
-    background: linear-gradient(180deg, rgba(0,0,30,0.9) 0%, rgba(0,0,15,1) 100%);
     position: relative;
-}
-
-.premium-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 20px;
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
-    color: #000;
-    border-radius: 25px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 800;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
 }
 
 .premium-badge svg {
@@ -246,13 +229,12 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    background: linear-gradient(135deg, #d9d9d9, #f0f0f0);
+    background: #d9d9d9;
     color: #010813;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 30px rgba(217, 217, 217, 0.4);
     display: inline-flex;
     align-items: center;
     gap: 15px;
@@ -260,7 +242,6 @@
 
 .calculate-btn:hover {
     transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(217, 217, 217, 0.6);
 }
 
 .calculate-btn:active {

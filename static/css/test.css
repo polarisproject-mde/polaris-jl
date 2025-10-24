@@ -1,14 +1,13 @@
 /* ============================================
-   TEST.CSS - Estilos mejorados para páginas de test
-   ============================================ */
+    TEST.CSS - Estilos mejorados para páginas de test
+    ============================================ */
 
 /* Contenedor principal del test */
 .test-container {
     max-width: 900px;
     margin: 120px auto 60px;
     padding: 40px;
-    /* Fondo muy oscuro: #010813, para contraste con el acento claro */
-    background: rgba(1, 8, 19, 0.98);
+    background: none;
     border-radius: 24px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
@@ -19,7 +18,7 @@
     margin-bottom: 40px;
     padding-bottom: 30px;
     /* Borde gris oscuro */
-    border-bottom: 3px solid #010c1e;
+    border-bottom: 3px solid #d9d9d9;
 }
 
 .test-icon {
@@ -477,7 +476,7 @@
 .btn-next,
 .btn-submit {
     /* Degradado de acento claro y oscuro */
-    background: linear-gradient(135deg, #d9d9d9, #010c1e);
+    background: #d9d9d9;
     /* Color de texto principal */
     color: #010c1e;
     border: none;
@@ -517,15 +516,14 @@
     align-items: center;
     gap: 12px;
     /* Fondo amarillo más oscuro */
-    background: linear-gradient(135deg, #4d431c 0%, #3d3419 100%);
+    background: #d9d9d9;
     /* Texto amarillo-claro */
-    color: #ffc107;
+    color: #010c1e;
     padding: 15px 20px;
     border-radius: 12px;
     margin-top: 20px;
     /* Borde amarillo */
-    border-left: 4px solid #ffc107;
-    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+    border-left: 4px solid #ff0707;
 }
 
 .alert-select svg {

@@ -7,6 +7,9 @@
     <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/resultado.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas id="stars"></canvas>
@@ -372,7 +375,7 @@
     <div class="menu" id="menu">
         <ul class="list">
             <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
-            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas</a></li>
             <li class="list-i"><a href="{{ url_for('calculadora') }}">Calculadora</a></li>
             <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
@@ -671,7 +674,7 @@
             <h3>Enlaces rápidos</h3>
             <ul>
                 <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
-                <li><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+                <li><a href="{{ url_for('programas-universidades') }}">Programas</a></li>
                 <li><a href="{{ url_for('blog') }}">Blog</a></li>
             </ul>
         </div>

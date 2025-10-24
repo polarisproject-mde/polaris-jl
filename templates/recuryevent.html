@@ -375,7 +375,7 @@
     <div class="menu" id="menu">
         <ul class="list">
             <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
-            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas</a></li>
             <li class="list-i"><a href="{{ url_for('calculadora') }}">Calculadora</a></li>
             <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
@@ -481,57 +481,6 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Clases y cursos -->
-            <div class="resource-card" data-category="courses">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Clases y Cursos</h3>
-                    <p>Información sobre cursos preparatorios, talleres especializados y programas de capacitación.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Online</span>
-                        <span class="feature-tag">Presencial</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="action-btn">
-                        <span>Ver cursos</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Recursos adicionales -->
-            <div class="resource-card" data-category="tools">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Herramientas y Recursos</h3>
-                    <p>Calculadoras de costos educativos, planificadores académicos y herramientas de productividad.</p>
-                    <div class="card-features">
-                        <span class="feature-tag">Gratuito</span>
-                        <span class="feature-tag">Útil</span>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <a href="{{ url_for('calculadora') }}"><button class="action-btn">
-                        <span>Usar herramientas</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button></a>
-                </div>
-            </div>
         </div>
 
         <!-- Call to Action Section -->
@@ -560,7 +509,7 @@
             <h3>Enlaces rápidos</h3>
             <ul>
                 <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
-                <li><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+                <li><a href="{{ url_for('programas-universidades') }}">Programas</a></li>
                 <li><a href="{{ url_for('blog') }}">Blog</a></li>
             </ul>
         </div>
