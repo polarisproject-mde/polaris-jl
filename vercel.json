@@ -5,8 +5,5 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "main.py" }
-  ],
-  "env": {
-    "SECRET_KEY": "@secret_key"
-  }
+  ]
 }
