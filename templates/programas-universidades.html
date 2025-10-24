@@ -14,7 +14,6 @@
 <body>
     <canvas id="stars"></canvas>
     <input type="checkbox" id="menu-toggle" />
-
     <div class="overlay" id="overlay"></div>
 
 <nav class="navbar">
@@ -372,24 +371,11 @@
     </div>
 </nav>
 
-<div class="menu" id="menu">
-    <ul class="list">
-        <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
-        <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas</a></li>
-        <li class="list-i"><a href="{{ url_for('calculadora') }}">Planificador</a></li>
-        <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
-        <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
-        <li class="list-i"><a href="{{ url_for('fechasimp') }}">Fechas importantes</a></li>
-        <li class="list-i"><a href="{{ url_for('blog') }}">Blog</a></li>
-    </ul>
-</div>
-
-    <!-- MENÚ (mantén tu menú existente) -->
     <div class="menu" id="menu">
         <ul class="list">
             <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas</a></li>
-            <li class="list-i"><a href="{{ url_for('calculadora') }}">Calculadora</a></li>
+            <li class="list-i"><a href="{{ url_for('calculadora') }}">Planificador</a></li>
             <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
             <li class="list-i"><a href="{{ url_for('fechasimp') }}">Fechas importantes</a></li>
