@@ -7,6 +7,10 @@
       "config": {
         "maxLambdaSize": "15mb"
       }
+    },
+    {
+      "src": "static/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -16,13 +20,15 @@
     },
     { 
       "src": "/(.*)", 
-      "dest": "main.py",
-      "headers": {
-        "Access-Control-Allow-Credentials": "true"
-      }
+      "dest": "main.py"
     }
   ],
   "env": {
     "ENVIRONMENT": "production"
+  },
+  "functions": {
+    "main.py": {
+      "includeFiles": "static/**"
+    }
   }
 }

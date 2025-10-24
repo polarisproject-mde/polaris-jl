@@ -39,8 +39,41 @@ app.add_middleware(
 )
 
 # Configuración de templates y archivos estáticos (DESPUÉS del middleware)
+# Configuración de templates
 templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# 🔥 FIX PARA ARCHIVOS ESTÁTICOS EN VERCEL
+if IS_PRODUCTION:
+    # En producción (Vercel), los archivos estáticos se sirven directamente
+    print("✅ Modo PRODUCCIÓN - archivos estáticos manejados por Vercel")
+else:
+    # En desarrollo local, montamos StaticFiles normalmente
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+    print("✅ Modo DESARROLLO - archivos estáticos montados localmente")
+
+
+# ================================
+# RUTA DE DEBUG PARA ARCHIVOS ESTÁTICOS
+# ================================
+
+@app.get("/debug-static")
+async def debug_static():
+    """Endpoint de debugging para verificar archivos estáticos"""
+    import os
+    
+    static_path = os.path.join(os.path.dirname(__file__), "static")
+    css_path = os.path.join(static_path, "css")
+    
+    return {
+        "environment": ENVIRONMENT,
+        "is_production": IS_PRODUCTION,
+        "static_exists": os.path.exists(static_path),
+        "css_exists": os.path.exists(css_path),
+        "static_files": os.listdir(static_path) if os.path.exists(static_path) else [],
+        "css_files": os.listdir(css_path) if os.path.exists(css_path) else [],
+        "current_dir": os.getcwd(),
+        "dir_contents": os.listdir(os.getcwd())
+    }
 
 # ================================
 # DEPENDENCIA DE AUTENTICACIÓN
