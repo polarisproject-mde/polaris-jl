@@ -18,9 +18,18 @@ from db import get_db
 
 app = FastAPI()
 
+# 🔒 CRÍTICO: SessionMiddleware DEBE ir ANTES de app.mount()
 SECRET_KEY = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
-# Configuración de templates y archivos estáticos
+app.add_middleware(
+    SessionMiddleware, 
+    secret_key=SECRET_KEY,
+    max_age=3600 * 24 * 7,  # 7 días
+    same_site="lax",
+    https_only=False
+)
+
+# Configuración de templates y archivos estáticos (DESPUÉS del middleware)
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
