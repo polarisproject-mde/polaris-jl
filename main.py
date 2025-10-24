@@ -124,94 +124,94 @@ TESTS_CONFIG = {
         "instrucciones": "Responde honestamente cada pregunta. No hay respuestas correctas o incorrectas.",
         "preguntas": [
             {"id": 1, "texto": "¿Disfrutas resolver problemas matemáticos y lógicos?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 2, "texto": "¿Te interesa comprender cómo funcionan las cosas y los fenómenos naturales?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 3, "texto": "¿Disfrutas trabajar con tecnología y computadoras?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 4, "texto": "¿Te gusta diseñar, construir o crear cosas nuevas?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 5, "texto": "¿Te interesa el mundo de los negocios y las finanzas?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 6, "texto": "¿Disfrutas realizar experimentos científicos?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 7, "texto": "¿Te gusta analizar datos y estadísticas?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 8, "texto": "¿Te interesa entender cómo funcionan los mercados económicos?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 9, "texto": "¿Disfrutas programar o aprender lenguajes de programación?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 10, "texto": "¿Te gusta trabajar en proyectos de construcción o mecánicos?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 11, "texto": "¿Te interesa la innovación y las nuevas tecnologías?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 12, "texto": "¿Disfrutas gestionar proyectos y organizar recursos?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 13, "texto": "¿Te gusta estudiar organismos vivos y ecosistemas?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 14, "texto": "¿Te interesa optimizar procesos y mejorar la eficiencia?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 15, "texto": "¿Disfrutas aprender sobre química y reacciones químicas?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 16, "texto": "¿Te gusta trabajar con circuitos y sistemas eléctricos?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 17, "texto": "¿Te interesa el marketing y las estrategias de ventas?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 18, "texto": "¿Disfrutas desarrollar aplicaciones o software?",
-             "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
-                         {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
-                         {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
+                "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
+                            {"valor": "C", "texto": "Neutral"}, {"valor": "D", "texto": "En desacuerdo"}, 
+                            {"valor": "E", "texto": "Totalmente en desacuerdo"}]},
             
             {"id": 19, "texto": "¿Te gusta analizar problemas complejos y encontrar soluciones creativas?",
              "opciones": [{"valor": "A", "texto": "Totalmente de acuerdo"}, {"valor": "B", "texto": "De acuerdo"}, 
@@ -2771,6 +2771,15 @@ async def login_post(
             "login.html",
             {"request": request, "error": "Error al iniciar sesión"}
         )
+        
+@app.get("/api/check-session")
+async def check_session(request: Request):
+    """Verifica si hay sesión activa"""
+    user = get_current_user(request)
+    return {
+        "logged_in": user is not None,
+        "user": user
+    }
 
 @app.get("/register", response_class=HTMLResponse, name="register")
 async def register_get(request: Request):

@@ -14,7 +14,7 @@
 <body>
     <canvas id="stars"></canvas>
     
-    <a href="{{ url_for('index') }}" class="back-button" onclick="history.back()">← Volver</a>
+    <a href="{{ url_for('index') }}" class="back-button">← Volver</a>
 
     <div class="login-container">
         <div class="logo-container">
@@ -303,7 +303,8 @@
         <div class="error-message" id="errorMessage" style="display: none;"></div>
         <div class="success-message" id="successMessage" style="display: none;"></div>
 
-        <form class="login-form" method="post" action="/login">
+        <!-- 🔥 FORMULARIO CON METHOD POST Y ACTION EXPLÍCITA -->
+        <form class="login-form" id="loginForm" method="POST" action="/login">
             <div class="form-group">
                 <label for="Gmail">Correo Electrónico</label>
                 <input type="email" id="Gmail" name="Gmail" placeholder="tu@email.com" required>
@@ -336,11 +337,15 @@
                 <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
             </div>
 
-            <button type="submit" class="login-btn">Iniciar Sesión</button>
+            <!-- 🔥 BOTÓN CON INDICADOR DE CARGA -->
+            <button type="submit" class="login-btn" id="loginBtn">
+                <span id="btnText">Iniciar Sesión</span>
+                <span id="btnLoader" style="display: none;">⏳ Ingresando...</span>
+            </button>
         </form>
 
         <p class="register-link">
-            ¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a>
+            ¿No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a>
         </p>
     </div>
 
@@ -375,25 +380,36 @@
             }
         }
 
-        function showMessage(message, type = 'error') {
-            const errorMsg = document.getElementById('errorMessage');
-            const successMsg = document.getElementById('successMessage');
+        // 🔥 NUEVO: MANEJO DEL FORMULARIO CON VALIDACIÓN
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+            const loginBtn = document.getElementById('loginBtn');
             
-            errorMsg.style.display = 'none';
-            successMsg.style.display = 'none';
+            // Mostrar indicador de carga
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline';
+            loginBtn.disabled = true;
             
-            if (type === 'error') {
-                errorMsg.textContent = message;
-                errorMsg.style.display = 'block';
-            } else {
-                successMsg.textContent = message;
-                successMsg.style.display = 'block';
-            }
-        }
+            // El formulario se enviará normalmente (no prevenir default)
+            // El servidor manejará la redirección
+        });
 
-        function showRegisterForm() {
-            window.location.href = 'register.html';
-        }
+        // 🔥 DETECCIÓN DE REDIRECCIÓN EXITOSA
+        window.addEventListener('pageshow', function(event) {
+            // Si volvemos atrás después de login exitoso, redirigir al home
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                // Verificar si hay sesión activa
+                fetch('/api/check-session')
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.logged_in) {
+                            window.location.href = '/';
+                        }
+                    })
+                    .catch(() => {});
+            }
+        });
 
         // Efectos de focus en los inputs
         document.querySelectorAll('.form-group input').forEach(input => {
