@@ -1,24 +1,143 @@
-// blog.js - VERSIÓN OPTIMIZADA Y RÁPIDA
+// programas-universidades.js - VERSIÓN CORREGIDA
 
-const API_URL = '/api';
-const COMMENTS_PER_PAGE = 10;
+const API_BASE = '/api';
 
 // Estado global
-let currentComments = [];
-let currentOffset = 0;
-let hasMore = true;
-let editingCommentId = null;
+let allPrograms = [];
+let filteredPrograms = [];
+let allUniversities = [];
+let allAreas = [];
+let allModalidades = [];
+let currentView = 'grid';
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
-    initializeForum();
+    console.log('🚀 Iniciando carga de programas...');
+    initializePage();
 });
 
-function initializeForum() {
-    loadComments();
-    loadPopularTopics();
-    setupEventListeners();
-    loadDraft();
+async function initializePage() {
+    try {
+        console.log('📡 Cargando datos de la API...');
+        showLoadingSpinner();
+        
+        // Cargar datos en paralelo con timeout
+        const timeout = 15000; // 15 segundos máximo
+        
+        const [programs, universities, areas, modalidades] = await Promise.race([
+            Promise.all([
+                fetchWithTimeout(`${API_BASE}/programas`, timeout),
+                fetchWithTimeout(`${API_BASE}/universidades`, timeout),
+                fetchWithTimeout(`${API_BASE}/areas`, timeout),
+                fetchWithTimeout(`${API_BASE}/modalidades`, timeout)
+            ]),
+            new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('Timeout')), timeout)
+            )
+        ]);
+        
+        console.log(`✅ Datos cargados: ${programs.length} programas, ${universities.length} universidades`);
+        
+        allPrograms = programs;
+        filteredPrograms = programs;
+        allUniversities = universities;
+        allAreas = areas;
+        allModalidades = modalidades;
+        
+        // Inicializar UI
+        populateFilters();
+        updateStats();
+        displayPrograms(filteredPrograms);
+        setupEventListeners();
+        
+        // Mostrar secciones
+        hideLoadingSpinner();
+        document.getElementById('stats-section').style.display = 'grid';
+        document.getElementById('filter-section').style.display = 'block';
+        document.getElementById('results-section').style.display = 'block';
+        
+        console.log('✨ Página inicializada correctamente');
+        
+    } catch (error) {
+        console.error('❌ Error al cargar datos:', error);
+        hideLoadingSpinner();
+        showError('Error al cargar la información. Por favor, recarga la página.');
+    }
+}
+
+// ================================
+// FETCH CON TIMEOUT
+// ================================
+
+async function fetchWithTimeout(url, timeout = 10000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    
+    try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        
+        return await response.json();
+    } catch (error) {
+        clearTimeout(timeoutId);
+        if (error.name === 'AbortError') {
+            throw new Error('La solicitud tardó demasiado');
+        }
+        throw error;
+    }
+}
+
+// ================================
+// POBLAR FILTROS
+// ================================
+
+function populateFilters() {
+    // Áreas
+    const areaSelect = document.getElementById('area-conocimiento');
+    areaSelect.innerHTML = '<option value="">Todas las áreas</option>';
+    allAreas.forEach(area => {
+        const option = document.createElement('option');
+        option.value = area.id;
+        option.textContent = area.nombre;
+        areaSelect.appendChild(option);
+    });
+    
+    // Modalidades
+    const modalidadSelect = document.getElementById('modalidad');
+    modalidadSelect.innerHTML = '<option value="">Todas las modalidades</option>';
+    allModalidades.forEach(modalidad => {
+        const option = document.createElement('option');
+        option.value = modalidad.id;
+        option.textContent = modalidad.nombre;
+        modalidadSelect.appendChild(option);
+    });
+    
+    // Universidades
+    const uniSelect = document.getElementById('universidad');
+    uniSelect.innerHTML = '<option value="">Todas las universidades</option>';
+    allUniversities.forEach(uni => {
+        const option = document.createElement('option');
+        option.value = uni.id;
+        option.textContent = `${uni.nombre}${uni.sigla ? ' (' + uni.sigla + ')' : ''}`;
+        uniSelect.appendChild(option);
+    });
+}
+
+// ================================
+// ESTADÍSTICAS
+// ================================
+
+function updateStats() {
+    document.getElementById('total-programs').textContent = allPrograms.length;
+    document.getElementById('total-universities').textContent = allUniversities.length;
+    document.getElementById('total-areas').textContent = allAreas.length;
+    
+    const avgDuration = allPrograms.reduce((sum, p) => sum + (p.duracion_semestres || 0), 0) / allPrograms.length;
+    document.getElementById('avg-duration').textContent = `${Math.round(avgDuration)} semestres`;
 }
 
 // ================================
@@ -26,673 +145,385 @@ function initializeForum() {
 // ================================
 
 function setupEventListeners() {
-    const commentForm = document.getElementById('comment-form');
-    commentForm.addEventListener('submit', handleCommentSubmit);
-    
-    const commentInput = document.getElementById('comment-input');
-    commentInput.addEventListener('input', updateCharacterCount);
-    
-    window.resetCommentForm = resetForm;
-    
-    const saveDraftBtn = document.getElementById('save-draft');
-    saveDraftBtn.addEventListener('click', saveDraft);
-    
-    const viewBtns = document.querySelectorAll('.view-btn');
-    viewBtns.forEach(btn => {
-        btn.addEventListener('click', handleViewChange);
+    // Búsqueda
+    document.getElementById('btn-search').addEventListener('click', applyFilters);
+    document.getElementById('search-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') applyFilters();
     });
     
-    const sortSelect = document.getElementById('sort-comments');
-    sortSelect.addEventListener('change', handleSortChange);
+    // Limpiar
+    document.getElementById('btn-clear').addEventListener('click', clearFilters);
     
-    const filterSelect = document.getElementById('filter-topic');
-    filterSelect.addEventListener('change', handleFilterChange);
+    // Ordenar
+    document.getElementById('sort-select').addEventListener('change', handleSort);
     
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    loadMoreBtn.addEventListener('click', loadMoreComments);
+    // Vista
+    document.getElementById('btn-toggle-view').addEventListener('click', toggleView);
     
-    setupFAQAccordion();
-    setupTopicFilters();
+    // Reset
+    const btnReset = document.getElementById('btn-reset-filters');
+    if (btnReset) {
+        btnReset.addEventListener('click', clearFilters);
+    }
+    
+    // Modal
+    const modalClose = document.querySelector('.modal-close');
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+    
+    window.addEventListener('click', (e) => {
+        const modal = document.getElementById('program-modal');
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
 }
 
 // ================================
-// CARGAR COMENTARIOS - OPTIMIZADO
+// FILTROS
 // ================================
 
-async function loadComments(reset = true) {
-    if (reset) {
-        currentOffset = 0;
-        currentComments = [];
-    }
+function applyFilters() {
+    const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+    const areaId = document.getElementById('area-conocimiento').value;
+    const modalidadId = document.getElementById('modalidad').value;
+    const tipoUni = document.getElementById('tipo-universidad').value;
+    const uniId = document.getElementById('universidad').value;
     
-    const sortSelect = document.getElementById('sort-comments');
-    const filterSelect = document.getElementById('filter-topic');
-    const orden = sortSelect.value;
-    const tema = filterSelect.value;
+    filteredPrograms = allPrograms.filter(program => {
+        // Búsqueda por texto
+        if (searchTerm) {
+            const matchName = program.nombre.toLowerCase().includes(searchTerm);
+            const matchUni = program.universidad_nombre.toLowerCase().includes(searchTerm);
+            if (!matchName && !matchUni) return false;
+        }
+        
+        // Área
+        if (areaId && program.area_nombre !== allAreas.find(a => a.id == areaId)?.nombre) {
+            return false;
+        }
+        
+        // Modalidad
+        if (modalidadId) {
+            const modalidadName = allModalidades.find(m => m.id == modalidadId)?.nombre;
+            if (!program.modalidades.includes(modalidadName)) {
+                return false;
+            }
+        }
+        
+        // Tipo universidad
+        if (tipoUni && program.tipo_universidad !== tipoUni) {
+            return false;
+        }
+        
+        // Universidad específica
+        if (uniId && program.universidad_id != uniId) {
+            return false;
+        }
+        
+        return true;
+    });
     
-    try {
-        showLoading();
-        
-        // Timeout de 8 segundos
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8000);
-        
-        const url = `${API_URL}/comentarios?orden=${orden}&tema=${tema}&limit=${COMMENTS_PER_PAGE}&offset=${currentOffset}`;
-        const response = await fetch(url, { signal: controller.signal });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error('Error al cargar comentarios');
-        }
-        
-        const data = await response.json();
-        
-        if (reset) {
-            currentComments = data.comentarios;
-        } else {
-            currentComments = [...currentComments, ...data.comentarios];
-        }
-        
-        hasMore = data.has_more;
-        currentOffset += data.comentarios.length;
-        
-        displayComments(currentComments);
-        updateLoadMoreButton();
-        
-    } catch (error) {
-        if (error.name === 'AbortError') {
-            showNotification('La carga está tardando mucho. Intenta recargar la página.', 'warning');
-        } else {
-            console.error('Error al cargar comentarios:', error);
-            showNotification('Error al cargar comentarios', 'error');
-        }
-    } finally {
-        hideLoading();
-    }
+    displayPrograms(filteredPrograms);
 }
 
-function displayComments(comments) {
-    const commentsList = document.getElementById('comments-list');
-    const noComments = document.getElementById('no-comments');
+function clearFilters() {
+    document.getElementById('search-input').value = '';
+    document.getElementById('area-conocimiento').value = '';
+    document.getElementById('modalidad').value = '';
+    document.getElementById('tipo-universidad').value = '';
+    document.getElementById('universidad').value = '';
+    document.getElementById('sort-select').value = 'nombre';
     
-    if (comments.length === 0) {
-        commentsList.style.display = 'none';
-        noComments.style.display = 'flex';
+    filteredPrograms = [...allPrograms];
+    displayPrograms(filteredPrograms);
+}
+
+// ================================
+// ORDENAR
+// ================================
+
+function handleSort() {
+    const sortBy = document.getElementById('sort-select').value;
+    
+    filteredPrograms.sort((a, b) => {
+        switch(sortBy) {
+            case 'nombre':
+                return a.nombre.localeCompare(b.nombre);
+            case 'universidad':
+                return a.universidad_nombre.localeCompare(b.universidad_nombre);
+            case 'area':
+                return a.area_nombre.localeCompare(b.area_nombre);
+            case 'duracion':
+                return (b.duracion_semestres || 0) - (a.duracion_semestres || 0);
+            default:
+                return 0;
+        }
+    });
+    
+    displayPrograms(filteredPrograms);
+}
+
+// ================================
+// MOSTRAR PROGRAMAS
+// ================================
+
+function displayPrograms(programs) {
+    const container = document.getElementById('programs-container');
+    const noResults = document.getElementById('no-results');
+    const resultsCount = document.getElementById('results-count');
+    
+    resultsCount.textContent = `(${programs.length} programa${programs.length !== 1 ? 's' : ''})`;
+    
+    if (programs.length === 0) {
+        container.style.display = 'none';
+        noResults.style.display = 'flex';
         return;
     }
     
-    commentsList.style.display = 'flex';
-    noComments.style.display = 'none';
+    container.style.display = 'grid';
+    noResults.style.display = 'none';
     
-    commentsList.innerHTML = comments.map(comment => createCommentHTML(comment)).join('');
+    container.innerHTML = programs.map(program => createProgramCard(program)).join('');
     
-    comments.forEach(comment => {
-        setupCommentActions(comment.id);
+    // Event listeners para cards
+    document.querySelectorAll('.program-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const programId = card.dataset.programId;
+            openProgramDetail(programId);
+        });
     });
 }
 
-function createCommentHTML(comment) {
-    const date = new Date(comment.fecha_creacion);
-    const formattedDate = formatDate(date);
-    const initials = getInitials(comment.nombre);
-    const wasEdited = comment.fecha_creacion !== comment.fecha_actualizacion;
-    
-    const temaLabels = {
-        'orientacion': 'Orientación',
-        'universidades': 'Universidades',
-        'carreras': 'Carreras',
-        'becas': 'Becas',
-        'experiencias': 'Experiencias',
-        'otros': 'Otros'
-    };
-    
-    const temaDisplay = comment.tema ? temaLabels[comment.tema] || comment.tema : '';
-    
+function createProgramCard(program) {
     return `
-        <div class="comment-item" data-comment-id="${comment.id}">
-            <div class="comment-header">
-                <div class="comment-author">
-                    <div class="author-avatar">${initials}</div>
-                    <div class="author-info">
-                        <h4>${escapeHtml(comment.nombre)}</h4>
-                        <time datetime="${comment.fecha_creacion}">${formattedDate}</time>
-                        ${wasEdited ? '<span class="edited-label">(editado)</span>' : ''}
-                        ${temaDisplay ? `<span class="comment-topic">${temaDisplay}</span>` : ''}
-                    </div>
-                </div>
-                <div class="comment-actions-top">
-                    <button class="edit-btn" onclick="editComment(${comment.id})" title="Editar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                    </button>
-                    <button class="delete-btn" onclick="deleteComment(${comment.id})" title="Eliminar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="3 6 5 6 21 6"></polyline>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg>
-                    </button>
-                </div>
+        <div class="program-card" data-program-id="${program.id}">
+            <div class="program-card-header" style="background-color: ${program.area_color};">
+                <span class="program-icon">${program.area_icono}</span>
             </div>
-            <div class="comment-content">
-                <p>${escapeHtml(comment.contenido)}</p>
-            </div>
-            <div class="comment-actions">
-                <button class="like-btn" onclick="likeComment(${comment.id})" data-likes="${comment.likes}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            <div class="program-card-body">
+                <h3 class="program-name">${escapeHtml(program.nombre)}</h3>
+                <div class="program-university">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
                     </svg>
-                    <span class="like-count">${comment.likes}</span>
-                </button>
+                    <span>${escapeHtml(program.universidad_nombre)}</span>
+                </div>
+                <div class="program-details">
+                    <span class="program-detail">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        ${program.duracion_semestres} semestres
+                    </span>
+                    <span class="program-detail">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                        ${program.creditos} créditos
+                    </span>
+                </div>
+                ${program.modalidades.length > 0 ? `
+                    <div class="program-tags">
+                        ${program.modalidades.slice(0, 2).map(m => `
+                            <span class="tag">${escapeHtml(m)}</span>
+                        `).join('')}
+                        ${program.modalidades.length > 2 ? `
+                            <span class="tag">+${program.modalidades.length - 2}</span>
+                        ` : ''}
+                    </div>
+                ` : ''}
             </div>
         </div>
     `;
 }
 
-function setupCommentActions(commentId) {
-    // Ya están configurados con onclick
-}
-
 // ================================
-// CREAR/EDITAR COMENTARIO - OPTIMIZADO
+// DETALLE DEL PROGRAMA
 // ================================
 
-async function handleCommentSubmit(e) {
-    e.preventDefault();
-    
-    const submitBtn = e.target.querySelector('.submit-btn');
-    const originalText = submitBtn.querySelector('.btn-text').textContent;
-    
-    const nombre = document.getElementById('user-name').value.trim();
-    const tema = document.getElementById('user-topic').value;
-    const contenido = document.getElementById('comment-input').value.trim();
-    
-    // Validaciones
-    if (nombre.length < 2) {
-        showNotification('El nombre debe tener al menos 2 caracteres', 'error');
-        document.getElementById('user-name').focus();
-        return;
-    }
-    
-    if (contenido.length < 10) {
-        showNotification('El comentario debe tener al menos 10 caracteres', 'error');
-        document.getElementById('comment-input').focus();
-        return;
-    }
-    
-    if (contenido.length > 500) {
-        showNotification('El comentario no puede superar 500 caracteres', 'error');
-        document.getElementById('comment-input').focus();
-        return;
-    }
-    
-    // Deshabilitar botón
-    submitBtn.disabled = true;
-    submitBtn.querySelector('.btn-text').textContent = 'Publicando...';
-    
+async function openProgramDetail(programId) {
     try {
-        const comentarioData = {
-            nombre: nombre,
-            tema: tema || null,
-            contenido: contenido
-        };
+        showLoadingModal();
         
-        let response;
-        let url;
-        let method;
+        const program = await fetchWithTimeout(`${API_BASE}/programas/${programId}`, 10000);
         
-        if (editingCommentId) {
-            url = `${API_URL}/comentarios/${editingCommentId}`;
-            method = 'PUT';
-            delete comentarioData.nombre;
-        } else {
-            url = `${API_URL}/comentarios`;
-            method = 'POST';
-        }
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = createProgramDetailHTML(program);
         
-        // Timeout de 10 segundos
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
-        
-        response = await fetch(url, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(comentarioData),
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || 'Error al procesar el comentario');
-        }
-        
-        await response.json();
-        
-        // Limpiar formulario
-        resetForm();
-        
-        // Mostrar notificación
-        showNotification(
-            editingCommentId ? '✓ Comentario actualizado' : '✓ Comentario publicado', 
-            'success'
-        );
-        
-        // Resetear modo edición
-        editingCommentId = null;
-        updateFormMode(false);
-        
-        // Recargar en background (NO ESPERAR)
-        setTimeout(() => {
-            loadComments(true);
-            loadPopularTopics();
-        }, 500);
+        document.getElementById('modal-program-name').textContent = program.nombre;
+        document.getElementById('program-modal').style.display = 'flex';
         
     } catch (error) {
-        console.error('Error:', error);
-        
-        if (error.name === 'AbortError') {
-            showNotification('La solicitud está tardando mucho. Intenta de nuevo.', 'warning');
-        } else {
-            showNotification(error.message || 'Error al publicar el comentario', 'error');
-        }
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.querySelector('.btn-text').textContent = originalText;
+        console.error('Error al cargar detalle:', error);
+        alert('Error al cargar el detalle del programa');
     }
 }
 
+function createProgramDetailHTML(program) {
+    return `
+        <div class="program-detail-section">
+            <h3>Información General</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <strong>Universidad:</strong>
+                    <p>${escapeHtml(program.universidad_nombre)}</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Tipo:</strong>
+                    <p>${program.tipo_universidad}</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Ciudad:</strong>
+                    <p>${program.ciudad}, ${program.departamento}</p>
+                </div>
+                ${program.codigo_snies ? `
+                <div class="detail-item">
+                    <strong>Código SNIES:</strong>
+                    <p>${program.codigo_snies}</p>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+        
+        <div class="program-detail-section">
+            <h3>Detalles Académicos</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <strong>Área:</strong>
+                    <p>${program.area_nombre}</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Duración:</strong>
+                    <p>${program.duracion_semestres} semestres</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Créditos:</strong>
+                    <p>${program.creditos}</p>
+                </div>
+                ${program.titulo_otorgado ? `
+                <div class="detail-item">
+                    <strong>Título:</strong>
+                    <p>${escapeHtml(program.titulo_otorgado)}</p>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+        
+        ${program.modalidades.length > 0 ? `
+        <div class="program-detail-section">
+            <h3>Modalidades</h3>
+            <div class="tags-container">
+                ${program.modalidades.map(m => `
+                    <span class="tag-large">${escapeHtml(m)}</span>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+        
+        ${program.descripcion ? `
+        <div class="program-detail-section">
+            <h3>Descripción</h3>
+            <p>${escapeHtml(program.descripcion)}</p>
+        </div>
+        ` : ''}
+        
+        ${program.perfil_profesional ? `
+        <div class="program-detail-section">
+            <h3>Perfil Profesional</h3>
+            <p>${escapeHtml(program.perfil_profesional)}</p>
+        </div>
+        ` : ''}
+        
+        ${program.campo_laboral && program.campo_laboral.length > 0 ? `
+        <div class="program-detail-section">
+            <h3>Campo Laboral</h3>
+            <ul class="campo-laboral-list">
+                ${program.campo_laboral.map(campo => `
+                    <li>${escapeHtml(campo)}</li>
+                `).join('')}
+            </ul>
+        </div>
+        ` : ''}
+        
+        ${program.costo_semestre ? `
+        <div class="program-detail-section">
+            <h3>Inversión</h3>
+            <p class="costo-info">Costo aproximado por semestre: <strong>$${formatCurrency(program.costo_semestre)}</strong></p>
+        </div>
+        ` : ''}
+        
+        ${program.campus.length > 0 ? `
+        <div class="program-detail-section">
+            <h3>Sedes</h3>
+            <div class="campus-list">
+                ${program.campus.map(campus => `
+                    <div class="campus-item">
+                        <h4>${escapeHtml(campus.nombre)} ${campus.es_principal ? '<span class="badge">Principal</span>' : ''}</h4>
+                        <p>${escapeHtml(campus.direccion)}</p>
+                        ${campus.ciudad ? `<p class="campus-city">${escapeHtml(campus.ciudad)}</p>` : ''}
+                        ${campus.telefono ? `<p class="campus-phone">📞 ${campus.telefono}</p>` : ''}
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+        
+        <div class="program-detail-section">
+            <h3>Contacto</h3>
+            <div class="contact-info">
+                ${program.universidad_website ? `
+                <p><strong>Sitio web:</strong> <a href="${program.universidad_website}" target="_blank" rel="noopener">${program.universidad_website}</a></p>
+                ` : ''}
+                ${program.universidad_telefono ? `
+                <p><strong>Teléfono:</strong> ${program.universidad_telefono}</p>
+                ` : ''}
+                ${program.universidad_email ? `
+                <p><strong>Email:</strong> <a href="mailto:${program.universidad_email}">${program.universidad_email}</a></p>
+                ` : ''}
+                ${program.universidad_direccion ? `
+                <p><strong>Dirección:</strong> ${escapeHtml(program.universidad_direccion)}</p>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+function closeModal() {
+    document.getElementById('program-modal').style.display = 'none';
+}
+
 // ================================
-// EDITAR COMENTARIO
+// CAMBIO DE VISTA
 // ================================
 
-window.editComment = async function(commentId) {
-    try {
-        const comment = currentComments.find(c => c.id === commentId);
-        if (!comment) {
-            showNotification('Comentario no encontrado', 'error');
-            return;
-        }
-        
-        document.getElementById('user-name').value = comment.nombre;
-        document.getElementById('user-topic').value = comment.tema || '';
-        document.getElementById('comment-input').value = comment.contenido;
-        
-        updateCharacterCount();
-        
-        editingCommentId = commentId;
-        updateFormMode(true);
-        
-        document.getElementById('comment-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-    } catch (error) {
-        console.error('Error al editar comentario:', error);
-        showNotification('Error al cargar el comentario para editar', 'error');
-    }
-};
-
-function updateFormMode(isEditing) {
-    const formHeader = document.querySelector('.form-header h3');
-    const submitBtn = document.querySelector('.submit-btn .btn-text');
+function toggleView() {
+    const btn = document.getElementById('btn-toggle-view');
+    const container = document.getElementById('programs-container');
     
-    if (isEditing) {
-        formHeader.textContent = 'Editar comentario';
-        submitBtn.textContent = 'Actualizar Comentario';
-        document.getElementById('comment-form').classList.add('editing-mode');
+    if (currentView === 'grid') {
+        currentView = 'list';
+        container.classList.remove('programs-grid');
+        container.classList.add('programs-list');
+        btn.querySelector('span').textContent = 'Vista de cuadrícula';
     } else {
-        formHeader.textContent = 'Comparte tu experiencia';
-        submitBtn.textContent = 'Publicar Comentario';
-        document.getElementById('comment-form').classList.remove('editing-mode');
+        currentView = 'grid';
+        container.classList.remove('programs-list');
+        container.classList.add('programs-grid');
+        btn.querySelector('span').textContent = 'Vista de lista';
     }
-}
-
-// ================================
-// ELIMINAR COMENTARIO
-// ================================
-
-window.deleteComment = async function(commentId) {
-    if (!confirm('¿Estás seguro de que quieres eliminar este comentario? Esta acción no se puede deshacer.')) {
-        return;
-    }
-    
-    try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-        
-        const response = await fetch(`${API_URL}/comentarios/${commentId}`, {
-            method: 'DELETE',
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error('Error al eliminar el comentario');
-        }
-        
-        showNotification('✓ Comentario eliminado', 'success');
-        
-        // Recargar en background
-        setTimeout(() => {
-            loadComments(true);
-            loadPopularTopics();
-        }, 300);
-        
-    } catch (error) {
-        if (error.name === 'AbortError') {
-            showNotification('Operación demorada. Recarga la página.', 'warning');
-        } else {
-            console.error('Error al eliminar comentario:', error);
-            showNotification('Error al eliminar el comentario', 'error');
-        }
-    }
-};
-
-// ================================
-// DAR LIKE
-// ================================
-
-window.likeComment = async function(commentId) {
-    try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-        
-        const response = await fetch(`${API_URL}/comentarios/${commentId}/like`, {
-            method: 'POST',
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error('Error al dar like');
-        }
-        
-        const data = await response.json();
-        
-        // Actualizar el contador en el DOM
-        const commentItem = document.querySelector(`[data-comment-id="${commentId}"]`);
-        const likeCount = commentItem.querySelector('.like-count');
-        likeCount.textContent = data.likes;
-        
-        // Animación
-        const likeBtn = commentItem.querySelector('.like-btn');
-        likeBtn.classList.add('liked');
-        setTimeout(() => {
-            likeBtn.classList.remove('liked');
-        }, 300);
-        
-        // Actualizar en el array local
-        const comment = currentComments.find(c => c.id === commentId);
-        if (comment) {
-            comment.likes = data.likes;
-        }
-        
-    } catch (error) {
-        if (error.name === 'AbortError') {
-            showNotification('Operación demorada', 'warning');
-        } else {
-            console.error('Error al dar like:', error);
-            showNotification('Error al dar like', 'error');
-        }
-    }
-};
-
-// ================================
-// TEMAS POPULARES
-// ================================
-
-async function loadPopularTopics() {
-    try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-        
-        const response = await fetch(`${API_URL}/temas-populares?limit=10`, {
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error('Error al cargar temas populares');
-        }
-        
-        const temas = await response.json();
-        displayPopularTopics(temas);
-        
-    } catch (error) {
-        console.error('Error al cargar temas populares:', error);
-    }
-}
-
-function displayPopularTopics(temas) {
-    const topicCloud = document.getElementById('topic-cloud');
-    
-    if (temas.length === 0) {
-        topicCloud.innerHTML = '<p style="text-align: center; color: var(--gray-500);">No hay temas activos aún</p>';
-        return;
-    }
-    
-    topicCloud.innerHTML = temas.map(tema => `
-        <span class="topic-tag" data-topic="${tema.tema}" data-count="${tema.contador}">
-            ${tema.nombre_display} <span class="topic-count">(${tema.contador})</span>
-        </span>
-    `).join('');
-}
-
-function setupTopicFilters() {
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.topic-tag')) {
-            const topicTag = e.target.closest('.topic-tag');
-            const tema = topicTag.dataset.topic;
-            
-            const filterSelect = document.getElementById('filter-topic');
-            filterSelect.value = tema;
-            
-            loadComments(true);
-            
-            document.getElementById('comments-container').scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-}
-
-// ================================
-// CONTROLES DE VISTA Y FILTROS
-// ================================
-
-function handleViewChange(e) {
-    const btn = e.currentTarget;
-    const view = btn.dataset.view;
-    
-    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    const commentsContainer = document.getElementById('comments-container');
-    const commentsList = document.getElementById('comments-list');
-    
-    if (view === 'grid') {
-        commentsContainer.classList.add('grid-view');
-        commentsContainer.classList.remove('list-view');
-        commentsList.classList.add('grid-view');
-    } else {
-        commentsContainer.classList.add('list-view');
-        commentsContainer.classList.remove('grid-view');
-        commentsList.classList.remove('grid-view');
-    }
-}
-
-function handleSortChange() {
-    loadComments(true);
-}
-
-function handleFilterChange() {
-    loadComments(true);
-}
-
-function loadMoreComments() {
-    loadComments(false);
-}
-
-function updateLoadMoreButton() {
-    const loadMoreContainer = document.getElementById('load-more-container');
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    
-    if (hasMore && currentComments.length > 0) {
-        loadMoreContainer.style.display = 'block';
-        loadMoreBtn.disabled = false;
-        loadMoreBtn.textContent = 'Cargar más comentarios';
-    } else if (currentComments.length > 0) {
-        loadMoreContainer.style.display = 'block';
-        loadMoreBtn.disabled = true;
-        loadMoreBtn.textContent = 'No hay más comentarios';
-    } else {
-        loadMoreContainer.style.display = 'none';
-    }
-}
-
-// ================================
-// FORMULARIO
-// ================================
-
-function resetForm() {
-    document.getElementById('comment-form').reset();
-    updateCharacterCount();
-    editingCommentId = null;
-    updateFormMode(false);
-    clearDraft();
-}
-
-function updateCharacterCount() {
-    const commentInput = document.getElementById('comment-input');
-    const charCount = document.getElementById('char-count');
-    const length = commentInput.value.length;
-    
-    charCount.textContent = length;
-    
-    if (length > 500) {
-        charCount.style.color = 'var(--error-red)';
-    } else if (length > 400) {
-        charCount.style.color = 'var(--warning-orange)';
-    } else {
-        charCount.style.color = 'inherit';
-    }
-}
-
-// ================================
-// BORRADOR
-// ================================
-
-function saveDraft() {
-    const nombre = document.getElementById('user-name').value;
-    const tema = document.getElementById('user-topic').value;
-    const contenido = document.getElementById('comment-input').value;
-    
-    if (!contenido.trim()) {
-        showNotification('No hay contenido para guardar', 'warning');
-        return;
-    }
-    
-    const draft = {
-        nombre,
-        tema,
-        contenido,
-        timestamp: new Date().toISOString()
-    };
-    
-    localStorage.setItem('comment_draft', JSON.stringify(draft));
-    showNotification('✓ Borrador guardado', 'success');
-}
-
-function loadDraft() {
-    const draftStr = localStorage.getItem('comment_draft');
-    
-    if (!draftStr) return;
-    
-    try {
-        const draft = JSON.parse(draftStr);
-        
-        const loadDraft = confirm('Se encontró un borrador guardado. ¿Deseas cargarlo?');
-        
-        if (loadDraft) {
-            document.getElementById('user-name').value = draft.nombre || '';
-            document.getElementById('user-topic').value = draft.tema || '';
-            document.getElementById('comment-input').value = draft.contenido || '';
-            updateCharacterCount();
-            showNotification('✓ Borrador cargado', 'success');
-        }
-    } catch (error) {
-        console.error('Error al cargar borrador:', error);
-    }
-}
-
-function clearDraft() {
-    localStorage.removeItem('comment_draft');
-}
-
-// ================================
-// FAQ ACCORDION
-// ================================
-
-function setupFAQAccordion() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            const faqItem = this.parentElement;
-            const isActive = faqItem.classList.contains('active');
-            
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
-        });
-    });
 }
 
 // ================================
 // UTILIDADES
 // ================================
 
-function formatDate(date) {
-    const now = new Date();
-    const diff = now - date;
-    
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
-    
-    if (minutes < 1) return 'Ahora mismo';
-    if (minutes < 60) return `Hace ${minutes} minuto${minutes !== 1 ? 's' : ''}`;
-    if (hours < 24) return `Hace ${hours} hora${hours !== 1 ? 's' : ''}`;
-    if (days < 7) return `Hace ${days} día${days !== 1 ? 's' : ''}`;
-    
-    return date.toLocaleDateString('es-ES', {
-        day: 'numeric',
-        month: 'long',
-        year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
-    });
-}
-
-function getInitials(name) {
-    if (!name) return '?';
-    
-    const words = name.trim().split(' ');
-    if (words.length === 1) {
-        return words[0].substring(0, 2).toUpperCase();
-    }
-    
-    return (words[0][0] + words[words.length - 1][0]).toUpperCase();
-}
-
 function escapeHtml(text) {
+    if (!text) return '';
     const map = {
         '&': '&amp;',
         '<': '&lt;',
@@ -700,46 +531,43 @@ function escapeHtml(text) {
         '"': '&quot;',
         "'": '&#039;'
     };
-    return text.replace(/[&<>"']/g, m => map[m]);
+    return String(text).replace(/[&<>"']/g, m => map[m]);
 }
 
-function showNotification(message, type = 'info') {
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 10);
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
-    }, 3000);
+function formatCurrency(value) {
+    return new Intl.NumberFormat('es-CO', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(value);
 }
 
-function showLoading() {
-    const commentsList = document.getElementById('comments-list');
-    commentsList.innerHTML = `
+function showLoadingSpinner() {
+    document.getElementById('loading-spinner').style.display = 'flex';
+}
+
+function hideLoadingSpinner() {
+    document.getElementById('loading-spinner').style.display = 'none';
+}
+
+function showLoadingModal() {
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
         <div class="loading-container">
             <div class="loading-spinner"></div>
-            <p>Cargando comentarios...</p>
+            <p>Cargando información...</p>
         </div>
     `;
+    document.getElementById('program-modal').style.display = 'flex';
 }
 
-function hideLoading() {
-    const loadingContainer = document.querySelector('.loading-container');
-    if (loadingContainer) {
-        loadingContainer.remove();
-    }
+function showError(message) {
+    const main = document.querySelector('.main-container');
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.innerHTML = `
+        <h2>Error al cargar</h2>
+        <p>${message}</p>
+        <button onclick="location.reload()" class="btn-primary">Recargar página</button>
+    `;
+    main.appendChild(errorDiv);
 }
