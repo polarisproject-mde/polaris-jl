@@ -7,10 +7,6 @@
       "config": {
         "maxLambdaSize": "15mb"
       }
-    },
-    {
-      "src": "static/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -30,5 +26,6 @@
     "main.py": {
       "includeFiles": "static/**"
     }
-  }
+  },
+  "outputDirectory": "."
 }

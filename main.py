@@ -43,13 +43,17 @@ app.add_middleware(
 templates = Jinja2Templates(directory="templates")
 
 # 🔥 FIX PARA ARCHIVOS ESTÁTICOS EN VERCEL
+# 📁 CONFIGURACIÓN DE ARCHIVOS ESTÁTICOS - CRITICAL FIX PARA VERCEL
 if IS_PRODUCTION:
-    # En producción (Vercel), los archivos estáticos se sirven directamente
+    # En Vercel, NO montar StaticFiles, se sirven directamente por vercel.json
     print("✅ Modo PRODUCCIÓN - archivos estáticos manejados por Vercel")
 else:
-    # En desarrollo local, montamos StaticFiles normalmente
-    app.mount("/static", StaticFiles(directory="static"), name="static")
-    print("✅ Modo DESARROLLO - archivos estáticos montados localmente")
+    # En desarrollo local, montar StaticFiles normalmente
+    try:
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+        print("✅ Modo DESARROLLO - archivos estáticos montados localmente")
+    except Exception as e:
+        print(f"⚠️ Error montando static: {e}")
 
 
 # ================================
