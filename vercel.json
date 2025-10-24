@@ -18,14 +18,5 @@
       "src": "/(.*)", 
       "dest": "main.py"
     }
-  ],
-  "env": {
-    "ENVIRONMENT": "production"
-  },
-  "functions": {
-    "main.py": {
-      "includeFiles": "static/**"
-    }
-  },
-  "outputDirectory": "."
+  ]
 }

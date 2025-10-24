@@ -32,26 +32,38 @@ SECRET_KEY = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 app.add_middleware(
     SessionMiddleware, 
     secret_key=SECRET_KEY,
-    max_age=3600 * 24 * 7,  # 7 días
-    same_site="none" if IS_PRODUCTION else "lax",  # CRÍTICO: "none" para Vercel
-    https_only=IS_PRODUCTION,  # CRÍTICO: True en producción
-    session_cookie="vocacional_session"  # Nombre específico
+    max_age=3600 * 24 * 7,
+    same_site="none" if IS_PRODUCTION else "lax",
+    https_only=IS_PRODUCTION,
+    session_cookie="vocacional_session"
 )
 
-# Configuración de templates y archivos estáticos (DESPUÉS del middleware)
 # Configuración de templates
 templates = Jinja2Templates(directory="templates")
 
-# 🔥 FIX PARA ARCHIVOS ESTÁTICOS EN VERCEL
-# 📁 CONFIGURACIÓN DE ARCHIVOS ESTÁTICOS - CRITICAL FIX PARA VERCEL
+# 🔥 CONFIGURACIÓN ARCHIVOS ESTÁTICOS - FIX DEFINITIVO PARA VERCEL
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
+
+print(f"🔍 BASE_DIR: {BASE_DIR}")
+print(f"🔍 STATIC_DIR: {STATIC_DIR}")
+print(f"🔍 STATIC_DIR exists: {STATIC_DIR.exists()}")
+
 if IS_PRODUCTION:
-    # En Vercel, NO montar StaticFiles, se sirven directamente por vercel.json
-    print("✅ Modo PRODUCCIÓN - archivos estáticos manejados por Vercel")
+    # En Vercel, montar StaticFiles CON configuración especial
+    try:
+        app.mount("/static", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")
+        print("✅ Modo PRODUCCIÓN - archivos estáticos montados")
+    except Exception as e:
+        print(f"⚠️ Error montando static en producción: {e}")
 else:
-    # En desarrollo local, montar StaticFiles normalmente
+    # En desarrollo local
     try:
         app.mount("/static", StaticFiles(directory="static"), name="static")
-        print("✅ Modo DESARROLLO - archivos estáticos montados localmente")
+        print("✅ Modo DESARROLLO - archivos estáticos montados")
     except Exception as e:
         print(f"⚠️ Error montando static: {e}")
 
