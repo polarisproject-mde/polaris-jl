@@ -18,6 +18,10 @@ from db import get_db
 
 app = FastAPI()
 
+# 🔧 Detectar si estamos en producción (Vercel)
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+IS_PRODUCTION = ENVIRONMENT == "production" or os.getenv("VERCEL") is not None
+
 # 🔒 CRÍTICO: SessionMiddleware DEBE ir ANTES de app.mount()
 SECRET_KEY = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
@@ -25,8 +29,9 @@ app.add_middleware(
     SessionMiddleware, 
     secret_key=SECRET_KEY,
     max_age=3600 * 24 * 7,  # 7 días
-    same_site="lax",
-    https_only=False
+    same_site="none" if IS_PRODUCTION else "lax",  # 🔥 CRÍTICO: "none" para Vercel
+    https_only=IS_PRODUCTION,  # 🔥 CRÍTICO: True en producción
+    session_cookie="vocacional_session"  # Nombre específico
 )
 
 # Configuración de templates y archivos estáticos (DESPUÉS del middleware)
@@ -42,6 +47,11 @@ def get_current_user(request: Request) -> Optional[dict]:
     Obtiene el usuario actual de la sesión.
     Retorna None si no hay usuario autenticado.
     """
+    # 🔍 Debug en producción
+    if IS_PRODUCTION:
+        print(f"🔍 Session keys: {list(request.session.keys())}")
+        print(f"🔍 Logged in: {request.session.get('logged_in')}")
+    
     user_id = request.session.get("user_id")
     
     if not user_id:
@@ -2674,18 +2684,25 @@ async def login_post(
         result = db.execute(query, {"gmail": Gmail, "pwd": contraseña}).fetchone()
 
         if result:
-            # 🔧 FIX: Guardar sesión de forma más explícita
-            request.session.clear()  # Limpiar sesión anterior
+            # 🔥 LIMPIEZA COMPLETA DE SESIÓN
+            request.session.clear()
+            
+            # 🔥 SETEAR VALORES UNO POR UNO
             request.session["user_id"] = result[0]
             request.session["user_nombre"] = result[1]
             request.session["user_gmail"] = result[2]
             request.session["user_rol"] = result[3]
-            request.session["logged_in"] = True  # Flag adicional
+            request.session["logged_in"] = True
             
-            # 🔧 FIX: Asegurar que la sesión se guarde
-            request.session.update(request.session)
+            # 🔥 FORZAR MODIFICACIÓN (crítico para Vercel)
+            request.session.modified = True
             
-            print(f"✅ Login exitoso - User ID: {result[0]}, Nombre: {result[1]}")
+            # 🔍 Debug
+            if IS_PRODUCTION:
+                print(f"✅ Login PRODUCCIÓN - User: {result[1]}")
+                print(f"📦 Session: {dict(request.session)}")
+            else:
+                print(f"✅ Login DESARROLLO - User ID: {result[0]}, Nombre: {result[1]}")
             
             return RedirectResponse(url="/", status_code=303)
         else:
@@ -2849,11 +2866,11 @@ async def actualizar_info_post(
         
         db.commit()
         
-        # 🔧 FIX: Actualizar sesión correctamente
+        # 🔥 ACTUALIZAR SESIÓN CORRECTAMENTE
         request.session["user_nombre"] = nombre
         request.session["user_gmail"] = email
         request.session["user_rol"] = rol
-        request.session.update(request.session)  # 👈 AGREGAR ESTA LÍNEA
+        request.session.modified = True 
         
         user["nombre"] = nombre
         user["gmail"] = email
