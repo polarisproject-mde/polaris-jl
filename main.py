@@ -1,3 +1,7 @@
+# ========================================
+# INICIO DE main.py - SECCIÓN LIMPIA
+# ========================================
+
 from fastapi import FastAPI, Request, Depends, Form, Query, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -18,19 +22,19 @@ from db import get_db
 
 app = FastAPI()
 
-# 🔧 Detectar si estamos en producción (Vercel)
+# Detectar si estamos en producción (Vercel)
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 IS_PRODUCTION = ENVIRONMENT == "production" or os.getenv("VERCEL") is not None
 
-# 🔒 CRÍTICO: SessionMiddleware DEBE ir ANTES de app.mount()
+# CRÍTICO: SessionMiddleware DEBE ir ANTES de app.mount()
 SECRET_KEY = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
 app.add_middleware(
     SessionMiddleware, 
     secret_key=SECRET_KEY,
     max_age=3600 * 24 * 7,  # 7 días
-    same_site="none" if IS_PRODUCTION else "lax",  # 🔥 CRÍTICO: "none" para Vercel
-    https_only=IS_PRODUCTION,  # 🔥 CRÍTICO: True en producción
+    same_site="none" if IS_PRODUCTION else "lax",  # CRÍTICO: "none" para Vercel
+    https_only=IS_PRODUCTION,  # CRÍTICO: True en producción
     session_cookie="vocacional_session"  # Nombre específico
 )
 
@@ -47,10 +51,10 @@ def get_current_user(request: Request) -> Optional[dict]:
     Obtiene el usuario actual de la sesión.
     Retorna None si no hay usuario autenticado.
     """
-    # 🔍 Debug en producción
+    # Debug en producción
     if IS_PRODUCTION:
-        print(f"🔍 Session keys: {list(request.session.keys())}")
-        print(f"🔍 Logged in: {request.session.get('logged_in')}")
+        print(f"Session keys: {list(request.session.keys())}")
+        print(f"Logged in: {request.session.get('logged_in')}")
     
     user_id = request.session.get("user_id")
     
@@ -2684,25 +2688,25 @@ async def login_post(
         result = db.execute(query, {"gmail": Gmail, "pwd": contraseña}).fetchone()
 
         if result:
-            # 🔥 LIMPIEZA COMPLETA DE SESIÓN
+            # LIMPIEZA COMPLETA DE SESIÓN
             request.session.clear()
             
-            # 🔥 SETEAR VALORES UNO POR UNO
+            # SETEAR VALORES UNO POR UNO
             request.session["user_id"] = result[0]
             request.session["user_nombre"] = result[1]
             request.session["user_gmail"] = result[2]
             request.session["user_rol"] = result[3]
             request.session["logged_in"] = True
             
-            # 🔥 FORZAR MODIFICACIÓN (crítico para Vercel)
+            # FORZAR MODIFICACIÓN (crítico para Vercel)
             request.session.modified = True
             
-            # 🔍 Debug
+            # Debug
             if IS_PRODUCTION:
-                print(f"✅ Login PRODUCCIÓN - User: {result[1]}")
-                print(f"📦 Session: {dict(request.session)}")
+                print(f"Login PRODUCCIÓN - User: {result[1]}")
+                print(f"Session: {dict(request.session)}")
             else:
-                print(f"✅ Login DESARROLLO - User ID: {result[0]}, Nombre: {result[1]}")
+                print(f"Login DESARROLLO - User ID: {result[0]}, Nombre: {result[1]}")
             
             return RedirectResponse(url="/", status_code=303)
         else:
@@ -2711,7 +2715,7 @@ async def login_post(
                 {"request": request, "error": "Correo o contraseña incorrectos"}
             )
     except Exception as e:
-        print(f"❌ Error en login: {e}")
+        print(f"Error en login: {e}")
         import traceback
         traceback.print_exc()
         return templates.TemplateResponse(
@@ -2866,7 +2870,7 @@ async def actualizar_info_post(
         
         db.commit()
         
-        # 🔥 ACTUALIZAR SESIÓN CORRECTAMENTE
+        # ACTUALIZAR SESIÓN CORRECTAMENTE
         request.session["user_nombre"] = nombre
         request.session["user_gmail"] = email
         request.session["user_rol"] = rol
@@ -2883,7 +2887,7 @@ async def actualizar_info_post(
         
     except Exception as e:
         db.rollback()
-        print(f"❌ Error al actualizar: {e}")
+        print(f"Error al actualizar: {e}")
         return templates.TemplateResponse(
             "actualizar-info.html",
             {"request": request, "user": user, "error": "Error al actualizar la información"}
