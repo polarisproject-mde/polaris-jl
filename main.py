@@ -2737,39 +2737,46 @@ async def login_post(
         result = db.execute(query, {"gmail": Gmail, "pwd": contraseña}).fetchone()
 
         if result:
-            # LIMPIEZA COMPLETA DE SESIÓN
+            # 🔥 ACCESO CORRECTO A LA SESIÓN
+            # NO usar request.session.modified directamente
+            
+            # Limpiar sesión anterior
             request.session.clear()
             
-            # SETEAR VALORES UNO POR UNO
+            # Setear valores uno por uno
             request.session["user_id"] = result[0]
             request.session["user_nombre"] = result[1]
             request.session["user_gmail"] = result[2]
             request.session["user_rol"] = result[3]
             request.session["logged_in"] = True
             
-            # FORZAR MODIFICACIÓN (crítico para Vercel)
-            request.session.modified = True
+            # 🔥 FIX: Forzar que la sesión se guarde
+            # En lugar de .modified = True, hacer un set adicional
+            request.session["_force_save"] = True
             
             # Debug
             if IS_PRODUCTION:
-                print(f"Login PRODUCCIÓN - User: {result[1]}")
-                print(f"Session: {dict(request.session)}")
+                print(f"✅ Login PRODUCCIÓN - User: {result[1]}")
+                print(f"Session guardada: {dict(request.session)}")
             else:
-                print(f"Login DESARROLLO - User ID: {result[0]}, Nombre: {result[1]}")
+                print(f"✅ Login DESARROLLO - User ID: {result[0]}, Nombre: {result[1]}")
             
+            # 🔥 REDIRECCIÓN CON CÓDIGO 303 (See Other)
             return RedirectResponse(url="/", status_code=303)
         else:
+            # Credenciales incorrectas
             return templates.TemplateResponse(
                 "login.html",
                 {"request": request, "error": "Correo o contraseña incorrectos"}
             )
+            
     except Exception as e:
-        print(f"Error en login: {e}")
+        print(f"❌ Error en login: {e}")
         import traceback
         traceback.print_exc()
         return templates.TemplateResponse(
             "login.html",
-            {"request": request, "error": "Error al iniciar sesión"}
+            {"request": request, "error": "Error al iniciar sesión. Intenta nuevamente."}
         )
         
 @app.get("/api/check-session")
