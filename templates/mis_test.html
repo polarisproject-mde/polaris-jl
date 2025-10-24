@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Tests - Polaris</title>
+    <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/mis_test.css') }}">
+</head>
+<body>
+    <canvas id="stars"></canvas>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="{{ url_for('index') }}" class="logo">Polaris</a>
+        </div>
+        <div class="nav-right">
+            {% if user %}
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <span>{{ user.nombre }}</span>
+                    </button>
+                </div>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="auth-nav-btn login-nav">Iniciar</a>
+                <a href="{{ url_for('register') }}" class="auth-nav-btn register-nav">Registrarse</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="tests-container">
+        <div class="page-header">
+            <h1>📊 Mis Tests Vocacionales</h1>
+            <p>Revisa tus resultados y progreso</p>
+        </div>
+
+        {% if tests %}
+        <div class="tests-grid">
+            {% for test in tests %}
+            <div class="test-card">
+                <div class="test-card-header">
+                    <span class="test-type">{{ test.tipo|replace('_', ' ')|title }}</span>
+                    <span class="test-date">{{ test.fecha.strftime('%d/%m/%Y') }}</span>
+                </div>
+
+                <div class="test-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">{{ test.afinidad|round|int if test.afinidad else 0 }}%</div>
+                        <div class="stat-label">Afinidad</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ test.puntuacion if test.puntuacion else 0 }}</div>
+                        <div class="stat-label">Puntuación</div>
+                    </div>
+                </div>
+
+                {% if test.area %}
+                <div class="test-area">{{ test.area }}</div>
+                {% endif %}
+
+                <div class="test-card-actions">
+                    <button class="view-details-btn" onclick="location.href='/test/{{ test.id }}/detalle'">
+                        Ver Detalles
+                    </button>
+                    <button class="delete-test-btn" onclick="eliminarTest({{ test.id }}, event)">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h2>Aún no has realizado ningún test</h2>
+            <p>Descubre tu vocación realizando tu primer test</p>
+            <a href="{{ url_for('test-vocacional') }}" class="start-test-btn">Realizar Test</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 id="pol">Polaris</h2>
+                <p>¡Tu guía para el éxito!</p>
+            </div>
+        </div>
+        <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
+    </footer>
+
+    <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
+    <script src="{{ url_for('static', path='js/user-menu.js') }}"></script>
+    <script src="{{ url_for('static', path='js/delete-test.js') }}"></script>
+</body>
+</html>

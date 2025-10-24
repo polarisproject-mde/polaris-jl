@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Polaris - Profesiones</title>
+    <title>Polaris - Programas Académicos</title>
     <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/profesiones.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/programas-universidades.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -14,18 +14,18 @@
 <body>
     <canvas id="stars"></canvas>
     <input type="checkbox" id="menu-toggle" />
-
     <div class="overlay" id="overlay"></div>
 
-<nav class="navbar">
-    <div class="nav-left" id="toggleButton">
-        <label for="menu-toggle" class="menu-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-                <path id="menu-h" fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
-            </svg>
-        </label>
-        <a href="{{ url_for('index') }}" class="logo">
-            <svg id="logoPolaris" version="1.0" xmlns="http://www.w3.org/2000/svg"
+    <!-- NAVBAR (mantén tu navbar existente) -->
+    <nav class="navbar">
+        <div class="nav-left" id="toggleButton">
+            <label for="menu-toggle" class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                    <path id="menu-h" fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+                </svg>
+            </label>
+            <a href="{{ url_for('index') }}" class="logo">
+                <svg id="logoPolaris" version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width="1056.000000pt" height="500.000000pt" viewBox="0 0 1056.000000 498.000000"
                 preserveAspectRatio="xMidYMid meet">
 
@@ -296,25 +296,22 @@
                 <path d="M2774 403 l-41 -4 -16 -77 c-10 -43 -17 -81 -17 -85 0 -9 86 -9 158
                 0 l54 6 -6 56 c-13 111 -13 111 -54 109 -20 -1 -55 -3 -78 -5z"/>
                 </g>
-            </svg>
-        </a>
-    </div>
-
-    <div class="nav-right">
-        {% if user %}
-            <!-- Usuario autenticado - Mostrar menú de usuario -->
+                </svg>
+            </a>
+        </div>
+        <div class="nav-right">
+            {% if user %}
             <div class="user-menu">
                 <button class="user-menu-btn" id="userMenuBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
                     </svg>
                     <span>{{ user.nombre }}</span>
-                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
-
                 <div class="user-dropdown" id="userDropdown">
                     <a href="{{ url_for('perfil') }}" class="dropdown-item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -327,18 +324,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                             <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10 9 9 9 8 9"/>
                         </svg>
                         Resultados del Test
-                    </a>
-                    <a href="{{ url_for('actualizar_info') }}" class="dropdown-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                        Actualizar Información
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ url_for('logout') }}" class="dropdown-item logout">
@@ -351,10 +338,9 @@
                     </a>
                 </div>
             </div>
-        {% else %}
-            <!-- Usuario NO autenticado - Mostrar botones de login/registro -->
+            {% else %}
             <a href="{{ url_for('login') }}" class="auth-nav-btn login-nav">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
                     <polyline points="10,17 15,12 10,7"/>
                     <line x1="15" y1="12" x2="3" y2="12"/>
@@ -362,21 +348,22 @@
                 <span>Iniciar</span>
             </a>
             <a href="{{ url_for('register') }}" class="auth-nav-btn register-nav">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                     <circle cx="12" cy="7" r="4"/>
                 </svg>
                 <span>Registrarse</span>
             </a>
-        {% endif %}
-    </div>
-</nav>
+            {% endif %}
+        </div>
+    </nav>
 
+    <!-- MENÚ (mantén tu menú existente) -->
     <div class="menu" id="menu">
         <ul class="list">
             <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
-            <li class="list-i"><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
-            <li class="list-i"><a href="{{ url_for('universidades') }}">Universidades</a></li>
+            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+            <li class="list-i"><a href="{{ url_for('calculadora') }}">Calculadora</a></li>
             <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
             <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
             <li class="list-i"><a href="{{ url_for('fechasimp') }}">Fechas importantes</a></li>
@@ -384,119 +371,158 @@
         </ul>
     </div>
 
-    <div class="contenedor-total">
-        <div class="sidebar">
-            <div class="search-form">
-                <form id="form-filtros" action="/api/filtrar-carreras" method="GET"> 
-                    
-                    <label for="area-conocimiento">Área de conocimiento:</label>
-                    <select id="area-conocimiento" name="area" class="estilos-botton">
-                        <option value="">Seleccione una opción</option>
-                        <option value="ciencias-naturales">Ciencias naturales</option>
-                        <option value="ciencias-sociales">Ciencias sociales</option>
-                        <option value="matematicas-logica">Matemáticas y lógica</option>
-                        <option value="ingenieria-tecnologia">Ingeniería y tecnología</option>
-                        <option value="humanidades">Humanidades</option>
-                        <option value="artes">Artes</option>
-                        <option value="ciencias-salud">Ciencias de la salud</option>
-                        <option value="ciencias-economicas">Ciencias económicas</option>
-                    </select>
-            
-                    <label for="modalidad-estudio">Modalidad de estudio:</label>
-                    <select id="modalidad-estudio" name="modalidad" class="estilos-botton">
-                        <option value="">Seleccione una opción</option>
-                        <option value="presencial">Presencial</option>
-                        <option value="online">Online</option>
-                        <option value="mixta">Mixta</option>
-                    </select>
-            
-                    <label for="duracion">Duración:</label>
-                    <select name="duracion" id="duracion" class="estilos-botton">
-                        <option value="">Seleccione una opción</option>
-                        <option value="1-2">1-2 años</option>
-                        <option value="2-3">2-3 años</option>
-                        <option value="3-4">3-4 años</option>
-                        <option value="4-5">4-5 años</option>
-                    </select>
-            
-                    <label for="tipo-estudio">Especialización:</label>
-                    <select name="especializacion" id="tipo-estudio" class="estilos-botton">
-                        <option value="">Seleccione una opción</option>
-                        <option value="tecnico">Técnico</option>
-                        <option value="tecnologia">Tecnología</option>
-                        <option value="profesion">Profesión</option>
-                        <option value="posgrado">Posgrado</option>
-                        <option value="maestria">Maestría</option>
-                        <option value="doctorado">Doctorado</option>
-                    </select>
-                    
-                    <button type="submit" id="boton-buscar">Buscar</button>
-                </form>
-            </div>   
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-container">
+        <!-- Header Section -->
+        <section class="header-section">
+            <h1>Programas Académicos en Medellín</h1>
+            <p>Explora programas de pregrado en las mejores universidades de la ciudad</p>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loading-spinner" class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Cargando información...</p>
         </div>
-        
-        <div class="contenido-despliega">
-            <div class="contenido-derecho">
-                <div class="frase-motivadora">
-                    <h2>Elige tu futuro, empieza hoy</h2>
-                    <p>Descubre carreras que marcan la diferencia</p>
+
+        <!-- Stats Section -->
+        <section class="stats-section" id="stats-section" style="display: none;">
+            <div class="stat-card">
+                <h3 id="total-programs">-</h3>
+                <p>Programas disponibles</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="total-universities">-</h3>
+                <p>Universidades</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="total-areas">-</h3>
+                <p>Áreas de conocimiento</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="avg-duration">-</h3>
+                <p>Duración promedio</p>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="filter-section" id="filter-section" style="display: none;">
+            <div class="filter-header">
+                <h2>Encuentra tu programa ideal</h2>
+                <p>Usa los filtros para encontrar el programa que mejor se adapte a tus intereses</p>
+            </div>
+            
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="area-conocimiento">Área de conocimiento</label>
+                    <select id="area-conocimiento" class="filter-select">
+                        <option value="">Todas las áreas</option>
+                    </select>
                 </div>
                 
-                <div class="carreras-recomendadas" id="contenedor-resultados">
-                    <h3>Resultados de la búsqueda</h3>
-                    <p>Cargando carreras...</p>
+                <div class="filter-group">
+                    <label for="modalidad">Modalidad de estudio</label>
+                    <select id="modalidad" class="filter-select">
+                        <option value="">Todas las modalidades</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="tipo-universidad">Tipo de universidad</label>
+                    <select id="tipo-universidad" class="filter-select">
+                        <option value="">Todos los tipos</option>
+                        <option value="Pública">Pública</option>
+                        <option value="Privada">Privada</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="universidad">Universidad específica</label>
+                    <select id="universidad" class="filter-select">
+                        <option value="">Todas las universidades</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Buscar por nombre de programa o universidad...">
+                <button id="btn-search" class="btn-search">Buscar</button>
+                <button id="btn-clear" class="btn-clear">Limpiar</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="results-section" style="display: none;">
+            <div class="results-header">
+                <h2>Resultados <span id="results-count">(0 programas)</span></h2>
+                <div class="results-controls">
+                    <select id="sort-select" class="sort-select">
+                        <option value="nombre">Ordenar por nombre</option>
+                        <option value="universidad">Ordenar por universidad</option>
+                        <option value="area">Ordenar por área</option>
+                        <option value="duracion">Ordenar por duración</option>
+                    </select>
+                    <button id="btn-toggle-view" class="btn-toggle-view">
+                        <span>Vista de lista</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="programs-container" class="programs-grid">
+                <!-- Los programas se cargarán aquí dinámicamente -->
+            </div>
+            
+            <div id="no-results" class="no-results" style="display: none;">
+                <h3>No se encontraron resultados</h3>
+                <p>Intenta ajustar tus filtros de búsqueda para encontrar más opciones</p>
+                <button id="btn-reset-filters" class="btn-primary">Restablecer filtros</button>
+            </div>
+        </section>
+
+        <!-- Program Detail Modal -->
+        <div id="program-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-program-name">Programa</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Se llena dinámicamente con detalles del programa -->
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-<footer>
-    <div class="footer-container">
-        <div class="footer-section">
-            <h2 id="pol">Polaris</h2>
-            <p>¡Tu guía para el éxito!</p>
+    <!-- FOOTER (mantén tu footer existente) -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 id="pol">Polaris</h2>
+                <p>¡Tu guía para el éxito!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces rápidos</h3>
+                <ul>
+                    <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
+                    <li><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+                    <li><a href="{{ url_for('blog') }}">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Información de contacto</h3>
+                <ul>
+                    <li>📞 +57 333-333-3333</li>
+                    <li>✉️ polarishelpco@gmail.com</li>
+                    <li>📍 Medellín, Colombia</li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-section">
-            <h3>Enlaces rápidos</h3>
-            <ul>
-                <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
-                <li><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
-                <li><a href="{{ url_for('blog') }}">Blog</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Información de contacto</h3>
-            <ul>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.15 9.81a19.86 19.86 0 0 1-3.07-8.63A2 2 0 0 1 2.09 1h3a2 2 0 0 1 2 1.72c.13 1.21.5 2.39 1.08 3.47a2 2 0 0 1-.45 2.11L6.21 9.79a16 16 0 0 0 8 8l1.49-1.49a2 2 0 0 1 2.11-.45c1.08.58 2.26.95 3.47 1.08a2 2 0 0 1 1.72 2z"/>
-                    </svg>
-                    +57 333-333-3333
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    polarishelpco@gmail.com
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                    Medellín, Colombia
-                </li>
-            </ul>
-        </div>
-    </div>
-    <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
-</footer>
+        <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
+    </footer>
 
     <script src="{{ url_for('static', path='js/clicmenu.js') }}"></script>
     <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
-    <script src="{{ url_for('static', path='js/profesiones.js') }}"></script>
+    <script src="{{ url_for('static', path='js/programas-universidades.js') }}"></script>
     <script src="{{ url_for('static', path='js/user-menu.js') }}"></script>
-
 </body>
 </html>

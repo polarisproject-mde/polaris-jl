@@ -1224,3 +1224,919 @@ select:focus-visible {
     }
 }
 
+/* ================================= */
+/*   ESTILOS ADICIONALES             */
+/* ================================= */
+
+/* Estado de edición del formulario */
+.comment-form.editing-mode {
+    border: 2px solid var(--accent-blue);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* Botones de editar y eliminar */
+.comment-actions-top {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 10px;
+    color: var(--gray-400);
+    transition: all var(--transition-fast);
+    opacity: 0;
+}
+
+.comment-item:hover .edit-btn {
+    opacity: 1;
+}
+
+.edit-btn:hover {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--accent-blue);
+    transform: scale(1.1);
+}
+
+/* Label de editado */
+.edited-label {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    font-style: italic;
+    margin-left: 8px;
+}
+
+/* Contador en los temas */
+.topic-count {
+    font-size: 0.85em;
+    opacity: 0.7;
+    margin-left: 4px;
+}
+
+/* Animación de like */
+.like-btn.liked {
+    animation: likeAnimation 0.3s ease;
+}
+
+@keyframes likeAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+.like-btn.liked svg {
+    fill: var(--accent-blue);
+    stroke: var(--accent-blue);
+}
+
+/* Loading spinner */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--gray-200);
+    border-top-color: var(--azul-dark);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-container p {
+    color: var(--azul-dark);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Notificaciones mejoradas */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--azul-dark);
+    color: var(--blanco-gris);
+    padding: 16px 24px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-xl);
+    font-weight: 600;
+    z-index: 10000;
+    transform: translateX(400px);
+    transition: transform var(--transition-normal);
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.error {
+    background: var(--error-red);
+}
+
+.notification.success {
+    background: var(--success-green);
+}
+
+.notification.warning {
+    background: var(--warning-orange);
+}
+
+.notification::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.notification.success::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-weight: 900;
+}
+
+.notification.error::before {
+    content: '✕';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-weight: 900;
+}
+
+.notification.warning::before {
+    content: '⚠';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-weight: 900;
+}
+
+/* Mejoras responsivas adicionales */
+@media (max-width: 768px) {
+    .comment-actions-top {
+        position: relative;
+    }
+    
+    .edit-btn,
+    .delete-btn {
+        opacity: 1;
+    }
+    
+    .notification {
+        right: 10px;
+        left: 10px;
+        max-width: calc(100% - 20px);
+    }
+}
+
+/* Estilos para botón "Cargar más" deshabilitado */
+.load-more-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--gray-300);
+    color: var(--gray-600);
+}
+
+.load-more-btn:disabled:hover {
+    background: var(--gray-300);
+    border-color: var(--gray-400);
+}
+
+/* Animación suave para comentarios nuevos */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.comment-item {
+    animation: slideInUp 0.4s ease-out;
+}
+
+/* ============================================
+   MEJORAS ADICIONALES PARA BLOG.CSS
+   Agrega estas reglas al final de tu blog.css
+   ============================================ */
+
+/* ================================================
+   MEJORAS EN ANIMACIONES Y TRANSICIONES
+   ================================================ */
+
+/* Transición suave global mejorada */
+* {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Animación de entrada de comentarios mejorada */
+@keyframes slideInUpSmooth {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.comment-item {
+    animation: slideInUpSmooth 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Efecto de hover más dinámico en comentarios */
+.comment-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.comment-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(1, 12, 30, 0.02), transparent);
+    transition: left 0.6s ease;
+}
+
+.comment-item:hover::before {
+    left: 100%;
+}
+
+/* ================================================
+   MEJORAS EN FORMULARIO
+   ================================================ */
+
+/* Indicador visual de campo activo */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    transform: translateY(-2px);
+}
+
+/* Animación de label flotante */
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+    transform: translateY(-4px);
+    font-size: 0.85rem;
+    color: var(--azul-dark);
+}
+
+/* Efecto de escritura en textarea */
+.form-group textarea {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.form-group textarea::placeholder {
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.form-group textarea:focus::placeholder {
+    opacity: 0.4;
+}
+
+/* Botón submit con efecto de onda */
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ================================================
+   MEJORAS EN LIKES Y ACCIONES
+   ================================================ */
+
+/* Efecto de pulso en like */
+@keyframes likePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.3) rotate(-10deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(10deg);
+    }
+    75% {
+        transform: scale(1.2) rotate(-5deg);
+    }
+}
+
+.like-btn.liked {
+    animation: likePulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: var(--accent-blue);
+}
+
+/* Contador de likes con animación */
+.like-count {
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.like-btn:hover .like-count {
+    transform: scale(1.2);
+    font-weight: 700;
+}
+
+/* ================================================
+   TEMAS POPULARES CON EFECTOS
+   ================================================ */
+
+.topic-tag {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.topic-tag:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.topic-tag::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--blanco-gris);
+    transform: translateX(-50%);
+    transition: width 0.3s;
+}
+
+.topic-tag:hover::after {
+    width: 80%;
+}
+
+/* Efecto de nube en temas */
+.topic-cloud {
+    animation: floatCloud 3s ease-in-out infinite;
+}
+
+@keyframes floatCloud {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ================================================
+   SCROLLBAR PERSONALIZADO MEJORADO
+   ================================================ */
+
+/* Para navegadores Webkit */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(to bottom, var(--gray-100), var(--gray-50));
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--azul-dark), var(--azul-negro));
+    border-radius: 5px;
+    border: 2px solid var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--azul-negro);
+}
+
+/* ================================================
+   AVATAR CON EFECTO 3D
+   ================================================ */
+
+.author-avatar {
+    position: relative;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.author-avatar::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.comment-item:hover .author-avatar {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.comment-item:hover .author-avatar::before {
+    opacity: 1;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(200%) rotate(45deg);
+    }
+}
+
+/* ================================================
+   LOADING MEJORADO
+   ================================================ */
+
+.loading-spinner {
+    position: relative;
+}
+
+.loading-spinner::before,
+.loading-spinner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.loading-spinner::before {
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(1, 12, 30, 0.1);
+    top: -5px;
+    left: -5px;
+}
+
+.loading-spinner::after {
+    width: 70px;
+    height: 70px;
+    border: 3px solid rgba(1, 12, 30, 0.05);
+    top: -10px;
+    left: -10px;
+    animation: spin 2s linear infinite reverse;
+}
+
+/* ================================================
+   BADGES Y ETIQUETAS
+   ================================================ */
+
+.comment-topic {
+    position: relative;
+    overflow: hidden;
+}
+
+.comment-topic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.comment-topic:hover::before {
+    left: 100%;
+}
+
+/* ================================================
+   NOTIFICACIONES TOAST MEJORADAS
+   ================================================ */
+
+.notification {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.notification.success {
+    background: linear-gradient(135deg, var(--success-green), #059669);
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, var(--error-red), #dc2626);
+    box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);
+}
+
+.notification.warning {
+    background: linear-gradient(135deg, var(--warning-orange), #f59e0b);
+    box-shadow: 0 10px 40px rgba(245, 158, 11, 0.4);
+}
+
+.notification.info {
+    background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.4);
+}
+
+/* ================================================
+   MODO EDICIÓN DEL FORMULARIO
+   ================================================ */
+
+.comment-form.editing-mode {
+    position: relative;
+    animation: editPulse 1s ease-out;
+}
+
+@keyframes editPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(37, 99, 235, 0.2);
+    }
+}
+
+.comment-form.editing-mode::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--accent-blue) 0%, 
+        var(--accent-purple) 50%, 
+        var(--accent-blue) 100%);
+    border-radius: 15px;
+    z-index: -1;
+    opacity: 0.5;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ================================================
+   CARDS CON EFECTO GLASSMORPHISM
+   ================================================ */
+
+.guidelines-card,
+.topics-card,
+.faq-card {
+    background: rgba(217, 217, 217, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.guidelines-card::before,
+.topics-card::before,
+.faq-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--azul-dark), var(--accent-blue), var(--azul-dark));
+    background-size: 200% 100%;
+    animation: gradientSlide 3s ease infinite;
+}
+
+@keyframes gradientSlide {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ================================================
+   EFECTOS EN BOTONES DE ACCIÓN
+   ================================================ */
+
+.edit-btn,
+.delete-btn,
+.share-btn {
+    position: relative;
+}
+
+.edit-btn::after,
+.delete-btn::after,
+.share-btn::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    background: var(--azul-dark);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.edit-btn:hover::after,
+.delete-btn:hover::after,
+.share-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* ================================================
+   HERO SECTION MEJORADO
+   ================================================ */
+
+.hero-section {
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ================================================
+   CONTADOR DE CARACTERES DINÁMICO
+   ================================================ */
+
+.character-count {
+    position: relative;
+    overflow: hidden;
+}
+
+.character-count::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--accent-blue);
+    width: 0;
+    transition: width 0.3s, background 0.3s;
+}
+
+.character-count[data-warning="true"]::before {
+    width: 100%;
+    background: var(--warning-orange);
+}
+
+.character-count[data-danger="true"]::before {
+    width: 100%;
+    background: var(--error-red);
+}
+
+/* ================================================
+   TRANSICIONES DE VISTA (GRID/LIST)
+   ================================================ */
+
+.comments-list {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.comments-list.grid-view .comment-item {
+    animation: gridIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes gridIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotateY(-20deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotateY(0);
+    }
+}
+
+/* ================================================
+   SCROLL SMOOTH INDICATOR
+   ================================================ */
+
+.scroll-indicator {
+    cursor: pointer;
+}
+
+.scroll-indicator:hover .scroll-arrow {
+    animation: bounceEnhanced 1s infinite;
+}
+
+@keyframes bounceEnhanced {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotate(45deg);
+    }
+    40% {
+        transform: translateY(-15px) rotate(45deg);
+    }
+    60% {
+        transform: translateY(-7px) rotate(45deg);
+    }
+}
+
+/* ================================================
+   FAQ ITEMS CON EFECTO ACORDEÓN SUAVE
+   ================================================ */
+
+.faq-answer {
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s;
+    opacity: 0;
+}
+
+.faq-item.active .faq-answer {
+    opacity: 1;
+}
+
+/* ================================================
+   SKELETON LOADING
+   ================================================ */
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 0px, #f8f8f8 40px, #f0f0f0 80px);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.2s ease-in-out infinite;
+}
+
+/* ================================================
+   MEJORAS RESPONSIVE
+   ================================================ */
+
+@media (max-width: 768px) {
+    /* Animaciones más ligeras en móvil */
+    * {
+        animation-duration: 0.3s !important;
+    }
+    
+    /* Reducir efectos hover en táctil */
+    .comment-item:hover::before,
+    .topic-tag::after {
+        display: none;
+    }
+    
+    /* Tooltips deshabilitados en móvil */
+    .edit-btn::after,
+    .delete-btn::after,
+    .share-btn::after {
+        display: none;
+    }
+}
+
+/* ================================================
+   DARK MODE PREPARATION (opcional)
+   ================================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* Aquí puedes agregar estilos para modo oscuro si lo deseas */
+    /* Ejemplo:
+    :root {
+        --azul-dark: #1a2332;
+        --azul-negro: #0d1117;
+        --blanco-gris: #e6edf3;
+    }
+    */
+}
+
+/* ================================================
+   IMPRESIÓN
+   ================================================ */
+
+@media print {
+    .comment-actions,
+    .comment-actions-top,
+    .hero-section,
+    .sidebar,
+    .comment-form,
+    .comments-controls {
+        display: none !important;
+    }
+    
+    .comment-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ================================================
+   ACCESIBILIDAD MEJORADA
+   ================================================ */
+
+/* Focus visible mejorado */
+*:focus-visible {
+    outline: 3px solid var(--accent-blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Indicador de navegación por teclado */
+body.user-is-tabbing *:focus {
+    outline: 3px dashed var(--accent-blue);
+}
+
+/* Contraste alto */
+@media (prefers-contrast: high) {
+    .comment-item {
+        border-width: 3px;
+    }
+    
+    .like-btn,
+    .edit-btn,
+    .delete-btn,
+    .share-btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

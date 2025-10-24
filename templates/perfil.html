@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Polaris - Mi Perfil</title>
+    <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/perfil.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="stars"></canvas>
+    
+    <a href="{{ url_for('index') }}" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Volver al Inicio
+    </a>
+
+    <div class="profile-container">
+        <div class="logo-container">
+            <!-- Aquí va el logo SVG -->
+        </div>
+
+        <div class="profile-header">
+            <div class="avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <h1 class="profile-title">Mi Perfil</h1>
+            <p class="profile-subtitle">Gestiona tu información personal</p>
+        </div>
+
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if success %}
+        <div class="success-message">
+            {{ success }}
+        </div>
+        {% endif %}
+
+        <div class="profile-content">
+            <div class="info-card">
+                <div class="info-header">
+                    <h2>Información Personal</h2>
+                    <a href="{{ url_for('actualizar_info') }}" class="edit-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        Editar
+                    </a>
+                </div>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <div>
+                            <label>Nombre</label>
+                            <span>{{ user.nombre }}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        <div>
+                            <label>Correo Electrónico</label>
+                            <span>{{ user.gmail }}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <polyline points="17 11 19 13 23 9"/>
+                        </svg>
+                        <div>
+                            <label>Rol</label>
+                            <span class="role-badge">{{ user.rol }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-card">
+                <h2>Acciones de Cuenta</h2>
+                
+                <div class="action-buttons">
+                    <a href="{{ url_for('resultados') }}" class="action-btn view-results">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                        Ver Resultados de Tests
+                    </a>
+
+                    <button class="action-btn delete-account" onclick="showDeleteModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            <line x1="10" y1="11" x2="10" y2="17"/>
+                            <line x1="14" y1="11" x2="14" y2="17"/>
+                        </svg>
+                        Eliminar Cuenta
+                    </button>
+                </div>
+
+                <div class="danger-zone">
+                    <h3>Zona de Peligro</h3>
+                    <p>Una vez que elimines tu cuenta, no hay vuelta atrás. Por favor, ten certeza.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación para eliminar cuenta -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <h2>¿Eliminar Cuenta?</h2>
+            </div>
+            
+            <div class="modal-body">
+                <p>Esta acción es <strong>permanente</strong> y no se puede deshacer. Se eliminarán todos tus datos, incluyendo:</p>
+                <ul>
+                    <li>Tu información personal</li>
+                    <li>Todos los resultados de tests vocacionales</li>
+                    <li>Tu historial de actividad</li>
+                </ul>
+                <p class="modal-warning">¿Estás seguro de que deseas continuar?</p>
+            </div>
+
+            <form method="post" action="/eliminar-cuenta" class="modal-form">
+                <div class="form-group">
+                    <label for="confirm-password">Para confirmar, ingresa tu contraseña:</label>
+                    <input type="password" id="confirm-password" name="contraseña" placeholder="Ingresa tu contraseña" required>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeDeleteModal()">Cancelar</button>
+                    <button type="submit" class="btn-delete">Eliminar mi cuenta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('deleteModal');
+            if (event.target === modal) {
+                closeDeleteModal();
+            }
+        }
+
+        // Efecto en los campos de información
+        document.querySelectorAll('.info-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+    
+    <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
+</body>
+</html>

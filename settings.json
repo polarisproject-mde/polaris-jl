@@ -1,0 +1,37 @@
+{
+    // Deshabilitar validación HTML/CSS/JS en archivos Jinja
+    "html.validate.styles": false,
+    "css.validate": false,
+    "html.validate.scripts": false,
+    "javascript.validate.enable": false,
+    
+    // Configurar Emmet para Jinja
+    "emmet.includeLanguages": {
+        "jinja-html": "html",
+        "jinja2": "html"
+    },
+    
+    // Asociar archivos .html como Jinja
+    "files.associations": {
+        "*.html": "jinja-html",
+        "**/templates/**/*.html": "jinja-html",
+        "**/templates/*.html": "jinja-html"
+    },
+    
+    // Deshabilitar validación en archivos específicos
+    "[jinja-html]": {
+        "editor.formatOnSave": false,
+        "html.validate.scripts": false,
+        "html.validate.styles": false,
+        "css.validate": false,
+        "javascript.validate.enable": false
+    },
+    
+    // Configuración adicional para Better Jinja
+    "better-jinja.lang": "es",
+    "better-jinja.formatOnSave": false,
+    
+    // Ignorar errores específicos
+    "html.customData": [],
+    "css.customData": []
+}

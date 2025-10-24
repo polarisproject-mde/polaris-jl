@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Polaris - Actualizar Información</title>
+    <link rel="icon" href="{{ url_for('static', path='img/polaris.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/actualizar-info.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="stars"></canvas>
+    
+    <a href="{{ url_for('perfil') }}" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Volver al Perfil
+    </a>
+
+    <div class="update-container">
+        <div class="logo-container">
+            <!-- Aquí va el logo SVG -->
+        </div>
+
+        <h2 class="form-title">Actualizar Información</h2>
+        <p class="form-subtitle">Modifica tu información personal y de seguridad</p>
+
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if success %}
+        <div class="success-message">
+            {{ success }}
+        </div>
+        {% endif %}
+
+        <form class="update-form" method="post" action="/actualizar-info">
+            <div class="form-section">
+                <h3 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Información Personal
+                </h3>
+
+                <div class="form-group">
+                    <label for="nombre">
+                        Nombre Completo
+                        <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="nombre" 
+                        name="nombre" 
+                        value="{{ user.nombre }}"
+                        placeholder="Ingresa tu nombre completo" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        Correo Electrónico
+                        <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        value="{{ user.gmail }}"
+                        placeholder="tu@email.com" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="rol">
+                        Rol
+                        <span class="required">*</span>
+                    </label>
+                    <select id="rol" name="rol" required>
+                        <option value="estudiante" {% if user.rol == 'estudiante' %}selected{% endif %}>Estudiante</option>
+                        <option value="familia" {% if user.rol == 'familia' %}selected{% endif %}>Familia</option>
+                        <option value="profesor" {% if user.rol == 'profesor' %}selected{% endif %}>Profesor</option>
+                        <option value="institucion" {% if user.rol == 'institucion' %}selected{% endif %}>Institución</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    Cambiar Contraseña
+                </h3>
+                <p class="section-note">Deja estos campos en blanco si no deseas cambiar tu contraseña</p>
+
+                <div class="form-group">
+                    <label for="contraseña_actual">Contraseña Actual</label>
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            id="contraseña_actual" 
+                            name="contraseña_actual" 
+                            placeholder="Ingresa tu contraseña actual"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('contraseña_actual')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contraseña_nueva">Nueva Contraseña</label>
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            id="contraseña_nueva" 
+                            name="contraseña_nueva" 
+                            placeholder="Ingresa tu nueva contraseña"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('contraseña_nueva')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <small class="password-hint">Mínimo 6 caracteres</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="contraseña_confirmar">Confirmar Nueva Contraseña</label>
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            id="contraseña_confirmar" 
+                            name="contraseña_confirmar" 
+                            placeholder="Confirma tu nueva contraseña"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('contraseña_confirmar')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{{ url_for('perfil') }}" class="btn-cancel">Cancelar</a>
+                <button type="submit" class="btn-save">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                        <polyline points="17 21 17 13 7 13 7 21"/>
+                        <polyline points="7 3 7 8 15 8"/>
+                    </svg>
+                    Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = passwordInput.nextElementSibling;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                    </svg>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                `;
+            }
+        }
+
+        // Validación de contraseñas coincidentes
+        const form = document.querySelector('.update-form');
+        form.addEventListener('submit', function(e) {
+            const nuevaPassword = document.getElementById('contraseña_nueva').value;
+            const confirmarPassword = document.getElementById('contraseña_confirmar').value;
+            const actualPassword = document.getElementById('contraseña_actual').value;
+
+            // Si se intenta cambiar la contraseña
+            if (nuevaPassword || confirmarPassword || actualPassword) {
+                if (!actualPassword) {
+                    e.preventDefault();
+                    alert('Debes ingresar tu contraseña actual para cambiarla');
+                    return;
+                }
+
+                if (nuevaPassword !== confirmarPassword) {
+                    e.preventDefault();
+                    alert('Las contraseñas nuevas no coinciden');
+                    return;
+                }
+
+                if (nuevaPassword.length < 6) {
+                    e.preventDefault();
+                    alert('La nueva contraseña debe tener al menos 6 caracteres');
+                    return;
+                }
+            }
+        });
+
+        // Efectos de focus en los inputs
+        document.querySelectorAll('.form-group input, .form-group select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+    
+    <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
+</body>
+</html>

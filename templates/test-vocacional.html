@@ -14,7 +14,6 @@
 <body>
     <canvas id="stars"></canvas>
     <input type="checkbox" id="menu-toggle" />
-
     <div class="overlay" id="overlay"></div>
 
 <nav class="navbar">
@@ -372,190 +371,126 @@
     </div>
 </nav>
 
-<div class="menu" id="menu">
-    <ul class="list">
-        <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
-        <li class="list-i"><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
-        <li class="list-i"><a href="{{ url_for('universidades') }}">Universidades</a></li>
-        <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
-        <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
-        <li class="list-i"><a href="{{ url_for('fechasimp') }}">Fechas importantes</a></li>
-        <li class="list-i"><a href="{{ url_for('blog') }}">Blog</a></li>
-    </ul>
-</div>
-
-<div class="vocational-test">
-    <div class="img-cerebro">
-        <img src="{{ url_for('static', path='img/cerebro.png') }}" alt="">
+    <div class="menu" id="menu">
+        <ul class="list">
+            <li class="list-i"><a href="{{ url_for('test-vocacional') }}">Test Vocacional</a></li>
+            <li class="list-i"><a href="{{ url_for('programas-universidades') }}">Programas y Universidades</a></li>
+            <li class="list-i"><a href="{{ url_for('calculadora') }}">Calculadora</a></li>
+            <li class="list-i"><a href="{{ url_for('guiav') }}">Guia Vocacional</a></li>
+            <li class="list-i"><a href="{{ url_for('recuryevent') }}">Recursos y Eventos</a></li>
+            <li class="list-i"><a href="{{ url_for('fechasimp') }}">Fechas importantes</a></li>
+            <li class="list-i"><a href="{{ url_for('blog') }}">Blog</a></li>
+        </ul>
     </div>
-    <div class="text-voc">
-        <div class="texto-vocacional">
-            <h1>Descubre tu vocación</h1>
-        </div>
-        <div class="btn-test">
-            <a href="test.html"><button>Realizar test</button></a>
+
+    <!-- Hero Section -->
+    <div class="test-hero">
+        <div class="hero-content">
+            <h1>Descubre tu Vocación</h1>
+            <p>Realiza nuestros tests especializados y encuentra el camino profesional perfecto para ti. Cada test está diseñado para revelar tus fortalezas y pasiones.</p>
         </div>
     </div>
-</div>
 
-<h2 class="text-indi">
-    Descubre que campo es el indicado para ti
-</h2>
+    <!-- Subtitle -->
+    <h2 class="test-subtitle">
+        Encuentra el campo indicado para ti
+    </h2>
 
-<div class="container-tests">
-    <a href="test_tecn.html" class="sin-linea">
-        <div class="test-tecn">
-            <h3>Tecnología</h3>
-            <div class="icon-tec">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 64 64"
-                    width="64" height="64"
-                    role="img"
-                    aria-labelledby="techTitle techDesc">
-                    <title id="techTitle">Icono de tecnología - microchip</title>
-                    <desc id="techDesc">Microchip estilizado con pines y líneas de circuito</desc>
-
-                    <rect x="14" y="14" width="36" height="36" rx="4" ry="4"
-                    fill="none" stroke="currentColor" stroke-width="2.5"/>
-                    <path d="M22 22h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M22 30h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M22 38h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <rect x="28" y="6" width="8" height="6" rx="1" fill="currentColor"/>
-                    <rect x="8" y="18" width="6" height="8" rx="1" fill="currentColor"/>
-                    <rect x="50" y="18" width="6" height="8" rx="1" fill="currentColor"/>
-                    <rect x="28" y="52" width="8" height="6" rx="1" fill="currentColor"/>
-                    <rect x="6" y="30" width="6" height="8" rx="1" fill="currentColor"/>
-                    <rect x="52" y="30" width="6" height="8" rx="1" fill="currentColor"/>
-                    <rect x="28" y="6" width="8" height="6" rx="1" fill="currentColor"/>
-                    <path d="M32 2v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                    <path d="M32 52v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                    <path d="M2 32h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                    <path d="M52 32h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
-            </div>
-        </div>
-    </a>
-
-    <a href="test_cienc.html" class="sin-linea">
-        <div class="test-cienc">
-            <h3>Ciencias</h3>
-            <div class="icon-cie">
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 64 64" 
-                    width="64" height="64"
-                    role="img" 
-                    aria-labelledby="scienceTitle scienceDesc">
-                    <title id="scienceTitle">Icono de ciencias - átomo</title>
-                    <desc id="scienceDesc">Átomo con órbitas de electrones alrededor de un núcleo</desc>
-
-                    <circle cx="32" cy="32" r="5" fill="currentColor"/>
-                    <ellipse cx="32" cy="32" rx="20" ry="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <ellipse cx="32" cy="32" rx="10" ry="20" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <ellipse cx="32" cy="32" rx="20" ry="20" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45 32 32)"/>
-                    <circle cx="52" cy="32" r="3" fill="currentColor"/>
-                    <circle cx="32" cy="12" r="3" fill="currentColor"/>
-                    <circle cx="46" cy="46" r="3" fill="currentColor"/>
-                </svg>
-            </div>
-        </div>
-    </a>
-
-    <a href="test_ing.html" class="sin-linea">
-        <div class="test-ingen">
-            <h3>Ingeniería</h3>
-            <div class="icon-ing">
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 64 64" 
-                    width="64" height="64"
-                    role="img" 
-                    aria-labelledby="engTitle engDesc">
-                    <title id="engTitle">Icono de ingenierías - engranaje</title>
-                    <desc id="engDesc">Engranaje estilizado que representa ingeniería y tecnología</desc>
-
-                    <circle cx="32" cy="32" r="10" fill="none" stroke="currentColor" stroke-width="3"/>
-                    <circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-                    <path d="M32 4v8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M32 52v8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M4 32h8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M52 32h8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M14 14l6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M44 44l6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M14 50l6-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M44 20l6-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-            </div>
-        </div>
-    </a>
-
-    <a href="test_eco.html" class="sin-linea">
-        <div class="test-econo">
-            <h3>Economía</h3>
-            <div class="icon-eco">
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 64 64" 
-                    width="64" height="64"
-                    role="img" 
-                    aria-labelledby="ecoTitle ecoDesc">
-                    <title id="ecoTitle">Icono de economía</title>
-                    <desc id="ecoDesc">Moneda circular con signo de dólar y barras de crecimiento</desc>
-
-                    <circle cx="24" cy="40" r="12" fill="none" stroke="currentColor" stroke-width="3"/>
-                    <path d="M24 33v14M20 36h6M20 44h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <rect x="40" y="34" width="4" height="14" fill="currentColor"/>
-                    <rect x="48" y="28" width="4" height="20" fill="currentColor"/>
-                    <rect x="56" y="22" width="4" height="26" fill="currentColor"/>
-                </svg>
-            </div>
-        </div>
-    </a>
-</div>
-
-<footer>
-    <div class="footer-container">
-        <div class="footer-section">
-            <h2 id="pol">Polaris</h2>
-            <p>¡Tu guía para el éxito!</p>
-        </div>
-        <div class="footer-section">
-            <h3>Enlaces rápidos</h3>
-            <ul>
-                <li><a href="{{ url_for('test-vocacional') }}">Test vocacional</a></li>
-                <li><a href="{{ url_for('profesiones') }}">Profesiones</a></li>
-                <li><a href="{{ url_for('blog') }}">Blog</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Información de contacto</h3>
-            <ul>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.15 9.81a19.86 19.86 0 0 1-3.07-8.63A2 2 0 0 1 2.09 1h3a2 2 0 0 1 2 1.72c.13 1.21.5 2.39 1.08 3.47a2 2 0 0 1-.45 2.11L6.21 9.79a16 16 0 0 0 8 8l1.49-1.49a2 2 0 0 1 2.11-.45c1.08.58 2.26.95 3.47 1.08a2 2 0 0 1 1.72 2z"/>
+    <!-- Tests Container -->
+    <div class="tests-container">
+        <div class="tests-grid">
+            <!-- Test General -->
+            <a href="{{ url_for('mostrar_test', tipo_test='general') }}" class="test-card test-general">
+                <div class="test-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                        <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="3"/>
+                        <path d="M32 12v8M32 44v8M12 32h8M44 32h8" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="32" cy="32" r="8" fill="currentColor"/>
                     </svg>
-                    +57 333-333-3333
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                        <polyline points="22,6 12,13 2,6"/>
+                </div>
+                <h3>Test General</h3>
+                <p>Evaluación completa de tus intereses, habilidades y personalidad vocacional</p>
+                <span class="test-duration">⏱️ 15-20 min</span>
+            </a>
+
+            <!-- Test Tecnología -->
+            <a href="{{ url_for('mostrar_test', tipo_test='tecnologia') }}" class="test-card test-tecn">
+                <div class="test-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                        <rect x="14" y="14" width="36" height="36" rx="4" ry="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                        <path d="M22 22h20M22 30h20M22 38h20" stroke="currentColor" stroke-width="2"/>
+                        <rect x="28" y="6" width="8" height="6" rx="1" fill="currentColor"/>
+                        <rect x="8" y="18" width="6" height="8" rx="1" fill="currentColor"/>
+                        <rect x="50" y="18" width="6" height="8" rx="1" fill="currentColor"/>
+                        <rect x="28" y="52" width="8" height="6" rx="1" fill="currentColor"/>
                     </svg>
-                    polarishelpco@gmail.com
-                </li>
-                <li>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
+                </div>
+                <h3>Tecnología</h3>
+                <p>Descubre tu afinidad con programación, desarrollo y el mundo digital</p>
+                <span class="test-duration">⏱️ 10-15 min</span>
+            </a>
+
+            <!-- Test Ciencias -->
+            <a href="{{ url_for('mostrar_test', tipo_test='ciencias') }}" class="test-card test-cienc">
+                <div class="test-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                        <circle cx="32" cy="32" r="5" fill="currentColor"/>
+                        <ellipse cx="32" cy="32" rx="20" ry="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <ellipse cx="32" cy="32" rx="10" ry="20" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <ellipse cx="32" cy="32" rx="20" ry="20" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45 32 32)"/>
+                        <circle cx="52" cy="32" r="3" fill="currentColor"/>
+                        <circle cx="32" cy="12" r="3" fill="currentColor"/>
+                        <circle cx="46" cy="46" r="3" fill="currentColor"/>
                     </svg>
-                    Medellín, Colombia
-                </li>
-            </ul>
+                </div>
+                <h3>Ciencias</h3>
+                <p>Evalúa tu vocación científica en química, biología, física y más</p>
+                <span class="test-duration">⏱️ 10-15 min</span>
+            </a>
+
+            <!-- Test Ingeniería -->
+            <a href="{{ url_for('mostrar_test', tipo_test='ingenieria') }}" class="test-card test-ingen">
+                <div class="test-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                        <circle cx="32" cy="32" r="10" fill="none" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
+                        <path d="M32 4v8M32 52v8M4 32h8M52 32h8" stroke="currentColor" stroke-width="3"/>
+                        <path d="M14 14l6 6M44 44l6 6M14 50l6-6M44 20l6-6" stroke="currentColor" stroke-width="3"/>
+                    </svg>
+                </div>
+                <h3>Ingeniería</h3>
+                <p>Mide tu aptitud para las diferentes ramas de la ingeniería</p>
+                <span class="test-duration">⏱️ 10-15 min</span>
+            </a>
+
+            <!-- Test Economía -->
+            <a href="{{ url_for('mostrar_test', tipo_test='economia') }}" class="test-card test-econo">
+                <div class="test-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                        <circle cx="24" cy="40" r="12" fill="none" stroke="currentColor" stroke-width="3"/>
+                        <path d="M24 33v14M20 36h6M20 44h6" stroke="currentColor" stroke-width="2"/>
+                        <rect x="40" y="34" width="4" height="14" fill="currentColor"/>
+                        <rect x="48" y="28" width="4" height="20" fill="currentColor"/>
+                        <rect x="56" y="22" width="4" height="26" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h3>Economía</h3>
+                <p>Descubre tu perfil económico y financiero ideal</p>
+                <span class="test-duration">⏱️ 10-15 min</span>
+            </a>
         </div>
     </div>
-    <p class="copy">© 2025 - Polaris <br> Todos los derechos reservados</p>
-</footer>
 
-<script src="{{ url_for('static', path='js/clicmenu.js') }}"></script>
-<script src="{{ url_for('static', path='js/fondo.js') }}"></script>
-<script src="{{ url_for('static', path='js/user-menu.js') }}"></script>
+    <!-- My Results Section -->
+    <div class="my-results-section">
+        <h2>📊 Mis Resultados</h2>
+        <p>Revisa y analiza todos los tests que has completado</p>
+        <a href="#" class="btn-results">Ver mis resultados</a>
+    </div>
+
+    <script src="{{ url_for('static', path='js/clicmenu.js') }}"></script>
+    <script src="{{ url_for('static', path='js/fondo.js') }}"></script>
+    <script src="{{ url_for('static', path='js/user-menu.js') }}"></script>
 
 </body>
 </html>
