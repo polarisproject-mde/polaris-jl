@@ -2935,24 +2935,27 @@ async def actualizar_info_post(
         
         db.commit()
         
-        # ACTUALIZAR SESIÓN CORRECTAMENTE
+        # 🔥 FIX: ACTUALIZAR SESIÓN CORRECTAMENTE (sin usar .modified)
         request.session["user_nombre"] = nombre
         request.session["user_gmail"] = email
         request.session["user_rol"] = rol
-        request.session.modified = True 
+        request.session["_force_save"] = True  # ✅ Esto reemplaza .modified = True
         
+        # Actualizar el objeto user local
         user["nombre"] = nombre
         user["gmail"] = email
         user["rol"] = rol
         
         return templates.TemplateResponse(
             "actualizar-info.html",
-            {"request": request, "user": user, "success": "Información actualizada correctamente"}
+            {"request": request, "user": user, "success": "✅ Información actualizada correctamente"}
         )
         
     except Exception as e:
         db.rollback()
-        print(f"Error al actualizar: {e}")
+        print(f"❌ Error al actualizar: {e}")
+        import traceback
+        traceback.print_exc()
         return templates.TemplateResponse(
             "actualizar-info.html",
             {"request": request, "user": user, "error": "Error al actualizar la información"}
