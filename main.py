@@ -2350,6 +2350,88 @@ async def detalle_test(
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Error al cargar el test")
 
+# ================================
+# RUTA PARA ELIMINAR TEST
+# ================================
+
+@app.delete("/test/{test_id}/eliminar")
+async def eliminar_test(
+    test_id: int,
+    request: Request,
+    db: Session = Depends(get_db),
+    user: dict = Depends(get_current_user)
+):
+    """Elimina un test y todos sus datos relacionados"""
+    if not user:
+        raise HTTPException(status_code=401, detail="No autenticado")
+    
+    try:
+        # 1. Verificar que el test pertenece al usuario
+        verify_query = text("""
+            SELECT id FROM tests_realizados 
+            WHERE id = :test_id AND usuario_id = :user_id
+        """)
+        
+        test_exists = db.execute(verify_query, {
+            "test_id": test_id,
+            "user_id": user["id"]
+        }).fetchone()
+        
+        if not test_exists:
+            raise HTTPException(
+                status_code=404, 
+                detail="Test no encontrado o no tienes permiso para eliminarlo"
+            )
+        
+        # 2. Eliminar en orden (por las foreign keys):
+        
+        # 2.1 Eliminar respuestas individuales
+        delete_respuestas = text("""
+            DELETE FROM respuestas_test 
+            WHERE test_id = :test_id
+        """)
+        db.execute(delete_respuestas, {"test_id": test_id})
+        
+        # 2.2 Eliminar resultados
+        delete_resultados = text("""
+            DELETE FROM resultados_test 
+            WHERE test_id = :test_id
+        """)
+        db.execute(delete_resultados, {"test_id": test_id})
+        
+        # 2.3 Eliminar el test principal
+        delete_test = text("""
+            DELETE FROM tests_realizados 
+            WHERE id = :test_id AND usuario_id = :user_id
+        """)
+        db.execute(delete_test, {
+            "test_id": test_id,
+            "user_id": user["id"]
+        })
+        
+        # 3. Confirmar cambios
+        db.commit()
+        
+        print(f"✅ Test {test_id} eliminado correctamente por usuario {user['id']}")
+        
+        return {
+            "success": True,
+            "message": "Test eliminado correctamente",
+            "test_id": test_id
+        }
+        
+    except HTTPException:
+        db.rollback()
+        raise
+    except Exception as e:
+        db.rollback()
+        print(f"❌ Error al eliminar test: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Error al eliminar el test: {str(e)}"
+        )
 
 # ================================
 # NUEVA RUTA: ANÁLISIS COMPARATIVO
