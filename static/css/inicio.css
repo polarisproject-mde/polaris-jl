@@ -517,9 +517,14 @@
     }
 }
 
+/* ===================================
+   CARD DE BIENVENIDA (Usuario autenticado)
+   =================================== */
+
 .welcome-card {
     background: #d9d9d9;
     color: #010c1e;
+    /* Heredar el grid-column de .login-card para mantener el mismo tamaño */
 }
 
 .welcome-card h3 {
@@ -535,15 +540,15 @@
     font-family: "Montserrat", sans-serif;
 }
 
+/* Reusar la clase .auth-buttons para mantener el mismo layout */
 .user-actions {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    flex-wrap: wrap;
 }
 
 .action-btn {
-    flex: 1;
-    min-width: 150px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -552,6 +557,7 @@
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
+    font-family: "Montserrat", sans-serif;
     transition: all 0.3s ease;
     border: 2px solid transparent;
 }
@@ -575,7 +581,8 @@
 
 .action-btn.secondary:hover {
     background: #010813;
-    border-color: white;
+    color: #d9d9d9;
+    border-color: #010813;
     transform: translateY(-2px);
 }
 
