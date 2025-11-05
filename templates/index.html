@@ -399,89 +399,115 @@
         </section>
 
         <section id="dashboard" class="dashboard">
-            <header class="section-header">
-                <h2>Conoce nuestro panel</h2>
-                <p>Explora las diferentes secciones que hemos diseñado para ayudarte en tu camino profesional.</p>
-            </header>
-            
-            <div class="dashboard-grid">
-                <article class="card stats-card">
-                    <h3>Estadísticas Clave</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">70+</span>
-                            <span class="stat-label">Profesiones</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">9+</span>
-                            <span class="stat-label">Universidades</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">30+</span>
-                            <span class="stat-label">Usuarios</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card intro-card">
-                    <h3>Nuestra Misión</h3>
-                    <p>En Polaris, estamos dedicados a guiarte en cada paso de tu viaje académico y profesional. Te ayudamos a descubrir tus pasiones, explorar opciones y tomar decisiones informadas para tu futuro.</p>
-                    <ul class="feature-list">
-                        <li>Test vocacional personalizado</li>
-                        <li>Información detallada sobre carreras y universidades</li>
-                        <li>Recursos y eventos para potenciar tu desarrollo</li>
-                    </ul>
-                </article>
-
-                <article class="card login-card">
-                    <h3>Acceso a la Plataforma</h3>
-                    <div class="auth-buttons">
-                        <a href="{{ url_for('login') }}" class="auth-btn login-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                                <polyline points="10,17 15,12 10,7"/>
-                                <line x1="15" y1="12" x2="3" y2="12"/>
-                            </svg>
-                            Iniciar Sesión
-                        </a>
-                        <a href="{{ url_for('register') }}" class="auth-btn register-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
-                            Registrarse
-                        </a>
-                    </div>
-                </article>
-
-                <article class="card steps-card">
-                    <h3>¿Cómo Funciona?</h3>
-                    <div class="steps-grid">
-                        <div class="step-item">
-                            <span class="step-number">1</span>
-                            <div class="step-content">
-                                <h4>Descubre</h4>
-                                <p>Realiza nuestro test vocacional y descubre tus intereses.</p>
-                            </div>
-                        </div>
-                        <div class="step-item">
-                            <span class="step-number">2</span>
-                            <div class="step-content">
-                                <h4>Explora</h4>
-                                <p>Explora profesiones, universidades y fechas importantes.</p>
-                            </div>
-                        </div>
-                        <div class="step-item">
-                            <span class="step-number">3</span>
-                            <div class="step-content">
-                                <h4>Planifica</h4>
-                                <p>Utiliza nuestra guía para planificar tu futuro profesional.</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+    <header class="section-header">
+        <h2>Conoce nuestro panel</h2>
+        <p>Explora las diferentes secciones que hemos diseñado para ayudarte en tu camino profesional.</p>
+    </header>
+    
+    <div class="dashboard-grid">
+        <article class="card stats-card">
+            <h3>Estadísticas Clave</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">70+</span>
+                    <span class="stat-label">Profesiones</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">9+</span>
+                    <span class="stat-label">Universidades</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Usuarios</span>
+                </div>
             </div>
-        </section>
+        </article>
+
+        <article class="card intro-card">
+            <h3>Nuestra Misión</h3>
+            <p>En Polaris, estamos dedicados a guiarte en cada paso de tu viaje académico y profesional. Te ayudamos a descubrir tus pasiones, explorar opciones y tomar decisiones informadas para tu futuro.</p>
+            <ul class="feature-list">
+                <li>Test vocacional personalizado</li>
+                <li>Información detallada sobre carreras y universidades</li>
+                <li>Recursos y eventos para potenciar tu desarrollo</li>
+            </ul>
+        </article>
+
+        {% if user %}
+            <!-- ✅ USUARIO AUTENTICADO: Mostrar card de bienvenida -->
+            <article class="card welcome-card">
+                <h3>¡Bienvenido, {{ user.nombre }}! 👋</h3>
+                <p>Nos alegra tenerte de vuelta. Continúa explorando y planificando tu futuro profesional.</p>
+                <div class="user-actions">
+                    <a href="{{ url_for('test-vocacional') }}" class="action-btn primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                        Realizar Test
+                    </a>
+                    <a href="{{ url_for('perfil') }}" class="action-btn secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Ver Perfil
+                    </a>
+                </div>
+            </article>
+        {% else %}
+            <!-- ❌ USUARIO NO AUTENTICADO: Mostrar card de login/registro -->
+            <article class="card login-card">
+                <h3>Acceso a la Plataforma</h3>
+                <p>Inicia sesión o regístrate para acceder a todas las funcionalidades de Polaris.</p>
+                <div class="auth-buttons">
+                    <a href="{{ url_for('login') }}" class="auth-btn login-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                            <polyline points="10,17 15,12 10,7"/>
+                            <line x1="15" y1="12" x2="3" y2="12"/>
+                        </svg>
+                        Iniciar Sesión
+                    </a>
+                    <a href="{{ url_for('register') }}" class="auth-btn register-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Registrarse
+                    </a>
+                </div>
+            </article>
+        {% endif %}
+
+        <article class="card steps-card">
+            <h3>¿Cómo Funciona?</h3>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <h4>Descubre</h4>
+                        <p>Realiza nuestro test vocacional y descubre tus intereses.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <h4>Explora</h4>
+                        <p>Explora profesiones, universidades y fechas importantes.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <h4>Planifica</h4>
+                        <p>Utiliza nuestra guía para planificar tu futuro profesional.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
     </main>
 
 <footer>
