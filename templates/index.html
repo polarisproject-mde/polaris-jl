@@ -459,7 +459,6 @@
     <!-- ❌ USUARIO NO AUTENTICADO: Card de login/registro (TAMAÑO ORIGINAL) -->
     <article class="card login-card">
         <h3>Acceso a la Plataforma</h3>
-        <p>Inicia sesión o regístrate para acceder a todas las funcionalidades de Polaris.</p>
         <div class="auth-buttons">
             <a href="{{ url_for('login') }}" class="auth-btn login-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -479,6 +478,33 @@
         </div>
     </article>
 {% endif %}
+
+        <article class="card steps-card">
+            <h3>¿Cómo Funciona?</h3>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <h4>Descubre</h4>
+                        <p>Realiza nuestro test vocacional y descubre tus intereses.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <h4>Explora</h4>
+                        <p>Explora profesiones, universidades y fechas importantes.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <h4>Planifica</h4>
+                        <p>Utiliza nuestra guía para planificar tu futuro profesional.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
     </div>
 </section>
     </main>
