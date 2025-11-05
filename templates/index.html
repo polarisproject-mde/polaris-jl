@@ -436,7 +436,7 @@
         {% if user %}
     <!-- ✅ USUARIO AUTENTICADO: Card de bienvenida (MISMO TAMAÑO) -->
     <article class="card login-card welcome-card">
-        <h3>¡Bienvenido, {{ user.nombre }}! 👋</h3>
+        <h3>¡Bienvenido, {{ user.nombre }}!</h3>
         <p>Nos alegra tenerte de vuelta. Continúa explorando y planificando tu futuro profesional.</p>
         <div class="auth-buttons user-actions">
             <a href="{{ url_for('test-vocacional') }}" class="auth-btn action-btn primary">
